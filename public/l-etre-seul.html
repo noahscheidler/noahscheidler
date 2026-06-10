@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Être Seul — Noah Scheidler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg: #f7f4ee; --ink: #1c1a17; --muted: #a09a92; --max: 448px; }
+  html, body { min-height: 100%; background: #f8f7f5; padding: 3rem 1rem;
+    color: var(--ink); font-family: 'EB Garamond', Georgia, serif; -webkit-font-smoothing: antialiased; }
+  .folio { display: none; min-height: calc(var(--max, 448px) * 1.5);
+    min-height: unset; max-width: var(--max); margin: 0 auto; padding: 58px 36px 50px; flex-direction: column; animation: appear 0.4s ease; background: var(--bg); box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+ }
+  .folio.active { display: flex; }
+  @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+  .folio-cover {
+    aspect-ratio: 2 / 3;
+    min-height: unset !important;
+    height: auto; background: #ffffff; min-height: 100vh; }
+  .cover-top { margin-bottom: 20px; }
+  .cover-author-name {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #1c1a17;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+  }
+  .cover-mention {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #9a9288;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.04em;
+  }
+  .cover-h1 { font-size: 2.4rem; font-weight: 400; line-height: 1.15; letter-spacing: 0.01em; color: var(--ink); margin: 28px 0 12px; }
+  .cover-sub { font-size: 0.78rem; letter-spacing: 0.08em; color: var(--ink); margin-bottom: 20px; }
+  .cover-epi { font-style: italic; font-size: 0.88rem; line-height: 1.9; color: var(--muted); padding-bottom: 28px; }
+  .cover-foot { padding-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #e4dfd7; }
+  .cover-pub { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .letter-page { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+  .letter-img { width: 100%; max-width: 480px; box-shadow: 0 2px 24px rgba(0,0,0,0.08); background: #fff; }
+  .foot { display: flex; align-items: center; justify-content: space-between; padding-top: 48px; margin-top: auto; }
+  .foot-btn { background: none; border: none; cursor: pointer; font-family: 'EB Garamond', Georgia, serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding: 4px 0; transition: color 0.2s; }
+  .foot-btn:hover { color: var(--ink); }
+  .foot-btn:disabled { opacity: 0; pointer-events: none; }
+  @media (max-width: 600px) {
+    html { font-size: 85%; } .folio { padding: 72px 28px 64px; } .cover-h1 { font-size: 2.24rem; } }
+</style>
+</head>
+<body>
+
+<!-- 0. COUVERTURE -->
+<div class="folio folio-cover active" data-p="0">
+  <div>
+    <p class="cover-author-name">Noah Scheidler</p>
+    <p class="cover-mention">Lettre manuscrite</p>
+    <h1 class="cover-h1">L'Être Seul</h1>
+  </div>
+  <p class="cover-epi" style="margin-top:auto;padding-bottom:28px">Qui serait-tu si personne ne te regardait ?</p>
+  <div class="cover-foot">
+    <span class="cover-pub">Autopublié par l'auteur</span>
+    <button class="foot-btn" onclick="go(1)">Lire →</button>
+  </div>
+</div>
+
+
+
+<!-- 1. LA LETTRE -->
+<div class="folio" data-p="1">
+  <div class="letter-page">
+    <img src="/lettre-l-etre-seul.jpg" alt="L'Être Seul, lettre manuscrite de Noah Scheidler" class="letter-img">
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(0)">← Retour</button>
+    <span style="font-size:0.7rem;letter-spacing:0.12em;color:var(--muted);">1 / 1</span>
+    <button class="foot-btn" disabled></button>
+  </div>
+</div>
+
+<script>
+  let cur = 0;
+  function go(n) {
+    document.querySelectorAll('.folio').forEach(f => f.classList.remove('active'));
+    document.querySelector(`[data-p="${n}"]`).classList.add('active');
+    cur = n; window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>

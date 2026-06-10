@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traversées (Crossings) — Noah Scheidler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f7f4ee;
+    --ink: #1c1a17;
+    --muted: #a09a92;
+    --max: 448px;
+  }
+
+  html, body {
+    min-height: 100%;
+    background: #f8f7f5;
+    padding: 3rem 1rem;
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .folio {
+    display: none;
+    min-height: calc(var(--max, 448px) * 1.5);
+    min-height: unset;
+        max-width: var(--max);
+    margin: 0 auto;
+    padding: 58px 36px 50px;
+    flex-direction: column;
+    animation: appear 0.4s ease;
+    background: var(--bg);
+    box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+
+  }
+
+  .folio.active { display: flex; }
+
+  @keyframes appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .folio-cover {
+    aspect-ratio: 2 / 3;
+    min-height: unset !important;
+    height: auto;
+    background: #ffffff;
+    box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+    min-height: 100vh;
+  }
+
+  .cover-author-name {
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #1c1a17;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+  }
+
+  .cover-mention {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #9a9288;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.04em;
+  }
+
+  .cover-h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin: 28px 0 12px;
+  }
+
+  .cover-epi {
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+
+  .cover-foot {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #e4dfd7;
+  }
+
+  .cover-pub {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .poem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poem-title {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.2rem;
+  }
+
+  .poem p {
+    font-size: 0.9rem;
+    line-height: 1.95;
+    color: var(--ink);
+    margin-bottom: 0.2em;
+    text-align: left;
+  }
+
+  .poem p.para {
+    margin-bottom: 1em;
+  }
+
+  .poem p.para:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .poem p.signature {
+    margin-top: 2.5em;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 36px;
+    margin-top: auto;
+  }
+
+  .foot-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .foot-btn:hover { color: var(--ink); }
+  .foot-btn:disabled { opacity: 0; pointer-events: none; }
+
+  .foot-num {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 85%; }
+    .folio { padding: 72px 28px 64px; }
+    .cover-h1 { font-size: 2.24rem; }
+    .poem p { font-size: 0.97rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 0. COVER -->
+<div class="folio folio-cover active" data-p="0">
+  <div>
+    <p class="cover-author-name">Noah Scheidler</p>
+    <p class="cover-mention">A Poetry Journal</p>
+    <h1 class="cover-h1">Traversées</h1>
+  </div>
+  <p class="cover-epi" style="margin-top:auto;padding-bottom:28px">From the thorn to the dust,<br>an intimate diary in verse.</p>
+  <div class="cover-foot">
+    <span class="cover-pub">Self-published by the author</span>
+    <button class="foot-btn" onclick="go(1)">Read →</button>
+  </div>
+</div>
+
+<!-- 1. THE THORN -->
+<div class="folio" data-p="1">
+  <div class="poem">
+    <p class="poem-title">The Thorn</p>
+    <br>
+    <p class="para">On a walk in the middle of a blaze. Everything is dying around me. But I observe in the distance, a mist that draws my curiosity. It stands apart from the smoke I have seen throughout my journey through the flames. It is heavier, more convincing, there is something that captivates me. A special element composes it. In a fraction of a second, a path opens before me, a light at the end of the tunnel. So I take it and the obstacles bow before my desire for her.</p>
+    <p class="para">As I approach, my gaze meets that of a flower, still alive at the edge of the flames. She shimmers with a thousand fires, wrapped in a cold wind whose cover is almost magnetic and bewitching. Perhaps I have ventured into the eye of the cyclone. There before me, probably at the center of this disarray, is the most pleasant warmth of this place.</p>
+    <p class="para">I do not know whether I should save this flower from this hostile environment or whether her element suits her. It may be that she is the source of it, or perhaps she simply found herself there.</p>
+    <p class="para">Until now, a torch has protected me from this fire, a stick that ignites to keep the others at bay. The more I brought my torch into this fog, the more the flame that protected me faded before my eyes in the face of the chemical nature of this miracle standing before me. I find myself exposed. I think I am afraid. I no longer need to protect myself. My paradox has found a stronger one. I know my emotions perfectly and for once I am completely lost and guided in the same moment. The confusion transforms into a quest. I know where to go, I no longer want to wander in this hostility. I decide to end it. In the hypothesis that I myself started the fire in which I wander, I found myself face to face with the only being who survived my flames. I would never have found her if nothing was burning. It is time that led me there. Our energies found each other there.</p>
+    <p class="para">A simple instant of realisation; between the visual contact and the movement of my arm toward her mysterious body. My eyes and a rose. My hand and a thorn. I pluck her from the ground, she is soft. I bleed but my wound is like my incomprehension.</p>
+    <p class="para">When I picked her, time stopped. The sparks float in the air and the blaze froze like a painting. I hold this rose and these thorns. I am submerged in happiness, I look at this painting and I am seized by fascination. It is the dance of water and fire. The contact of this flower offers me a perspective of infinite creation. From now on I walk through a painting. Static flames, a floating mist and a luminous explosion at the center of the composition. The dance progresses and the work forgets the ordeal of the flames, the light takes hold of the painting which becomes white, almost blank.</p>
+    <p class="para">There is nothing left around, except my hand holding my rose in its thorns.</p>
+    <p class="para">I switch the hand in which I hold her. And I sign in red on this blank page the word love.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(0)">← Back</button>
+    <span class="foot-num" id="n1"></span>
+    <button class="foot-btn" onclick="go(2)">Next →</button>
+  </div>
+</div>
+
+<!-- 2. THE SPARK -->
+<div class="folio" data-p="2">
+  <div class="poem">
+    <p class="poem-title">The Spark</p>
+    <br>
+    <p>It was a story worthy of a film, a short unexpected episode, in the burning energy of an enigma full of twists</p>
+    <p>It is a moment I will keep in my mind and that will have destroyed me forever</p>
+    <p>The light fades, melts, moves away</p>
+    <p>A little more each time</p>
+    <p>I am the void, black</p>
+    <p>She is the comet, fast and furious, the fallen angel of a dream in mourning</p>
+    <p>Without having had time to speak, it had already defenestrated itself</p>
+    <p>An abandoned cloud</p>
+    <p>While I take flight, her wings fall toward the ground</p>
+    <p>The fog rumbles far beyond the shadows</p>
+    <p>I was blinded by a light I only glimpsed</p>
+    <p>Only to become a memory of it</p>
+    <p>Rubble</p>
+    <p>Of magic, of chemistry</p>
+    <p>We simply crossed paths.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(1)">← Previous</button>
+    <span class="foot-num" id="n2"></span>
+    <button class="foot-btn" onclick="go(3)">Next →</button>
+  </div>
+</div>
+
+<!-- 3. THE BREAK -->
+<div class="folio" data-p="3">
+  <div class="poem">
+    <p class="poem-title">The Break</p>
+    <br>
+    <p>I held back the tears from sliding down my chest</p>
+    <p>The cold pierced the warmth</p>
+    <p>The depths of the soul where the flames of the ego reside</p>
+    <p>The whole pierced my skin</p>
+    <p>Too late, the cascade carries me away, the birds flee and the clouds haunt me</p>
+    <p>A downpour approaches</p>
+    <p>I endure the torment of the seasons</p>
+    <p>I prepared myself for this flood, all my composure liquefied along my body</p>
+    <p>Through the flowers and the drink</p>
+    <p>My clothes and my passions</p>
+    <p>My dry face became wet with my sighs and cracks</p>
+    <p>This is the fate reserved for me</p>
+    <p>For the whim of my feelings</p>
+    <p>The tears fell</p>
+    <p>I am nothing more than an excess of them</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(2)">← Previous</button>
+    <span class="foot-num" id="n3"></span>
+    <button class="foot-btn" onclick="go(4)">Next →</button>
+  </div>
+</div>
+
+<!-- 4. THE NEWS -->
+<div class="folio" data-p="4">
+  <div class="poem">
+    <p class="poem-title">The News</p>
+    <br>
+    <p>She took me into her dream, where she left it to me alone</p>
+    <p>Her heart sought to be broken, I could not</p>
+    <p>So she broke it herself</p>
+    <p>A nocturnal vision</p>
+    <p>The silhouette of a lover</p>
+    <p>A cardiac awakening</p>
+    <p>I never would have believed the earth could turn so fast</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(3)">← Previous</button>
+    <span class="foot-num" id="n4"></span>
+    <button class="foot-btn" onclick="go(5)">Next →</button>
+  </div>
+</div>
+
+<!-- 5. THE ABANDONMENT -->
+<div class="folio" data-p="5">
+  <div class="poem">
+    <p class="poem-title">The Abandonment</p>
+    <br>
+    <p>I was ready for every sacrifice for her</p>
+    <p>So she sacrificed me</p>
+    <p>The most grandiose act I can perform is to do nothing</p>
+    <p>I have already fought and I have lost</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(4)">← Previous</button>
+    <span class="foot-num" id="n5"></span>
+    <button class="foot-btn" onclick="go(6)">Next →</button>
+  </div>
+</div>
+
+<!-- 6. RANCOUR -->
+<div class="folio" data-p="6">
+  <div class="poem">
+    <p class="poem-title">Rancour</p>
+    <br>
+    <p>I distrust love</p>
+    <p>For I believe in witches and wizards</p>
+    <p>Magicians one could call them</p>
+    <p>This game is lived from death</p>
+    <p>Sparks staged</p>
+    <p>At the whim of an illusion's trick</p>
+    <p>A shiver mourns</p>
+    <p>The heart palpitates</p>
+    <p>Has been deceived</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(5)">← Previous</button>
+    <span class="foot-num" id="n6"></span>
+    <button class="foot-btn" onclick="go(7)">Next →</button>
+  </div>
+</div>
+
+<!-- 7. THE ORIGIN -->
+<div class="folio" data-p="7">
+  <div class="poem">
+    <p class="poem-title">The Origin</p>
+    <br>
+    <p>The mother is a great oak</p>
+    <p>He is a leaf, detached from its tree</p>
+    <p>He was born when he took flight</p>
+    <p>What would he have told? Before falling to the earth</p>
+    <p>Offer her all your matter</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(6)">← Previous</button>
+    <span class="foot-num" id="n7"></span>
+    <button class="foot-btn" onclick="go(8)">Next →</button>
+  </div>
+</div>
+
+<!-- 8. AN ELEMENT -->
+<div class="folio" data-p="8">
+  <div class="poem">
+    <p class="poem-title">An Element</p>
+    <br>
+    <p>Before taking a step forward</p>
+    <p>I like to take a step back</p>
+    <p>To advance with a great surge</p>
+    <p>I crash to the ground to leap into the air</p>
+    <p>Volunteer of feelings</p>
+    <p>The state is a dance</p>
+    <p>A spirit very much alive</p>
+    <p>In the middle of the void</p>
+    <p>In a sphere</p>
+    <p>The earth is but a wind for what the soul is but a song</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(7)">← Previous</button>
+    <span class="foot-num" id="n8"></span>
+    <button class="foot-btn" onclick="go(9)">Next →</button>
+  </div>
+</div>
+
+<!-- 9. THE BIRD -->
+<div class="folio" data-p="9">
+  <div class="poem">
+    <p class="poem-title">The Bird</p>
+    <br>
+    <p>My wings spread</p>
+    <p>At the window ledge you joined me</p>
+    <p>Then you left</p>
+    <p>Capsizing toward the one who made you sail</p>
+    <p>I am only a shipwreck of my thoughts</p>
+    <p>A blind man would have seen beneath your laurels</p>
+    <p>The light I did not know how to witness</p>
+    <p>Trapped in one of your stray feathers</p>
+    <p>The wind carried me far away</p>
+    <p>The wind may bring you to come and retrieve it</p>
+    <p>To the thief who tore out your heart</p>
+    <p>This letter the bird never sent</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(8)">← Previous</button>
+    <span class="foot-num" id="n9"></span>
+    <button class="foot-btn" onclick="go(10)">Next →</button>
+  </div>
+</div>
+
+<!-- 10. THE PENROSE STAIRCASE -->
+<div class="folio" data-p="10">
+  <div class="poem">
+    <p class="poem-title">The Penrose Staircase</p>
+    <br>
+    <p class="para">After the encounter of an invisible step, here we are fallen into an inexplicable void, filled with infinite desires, where as prisoners we make the best of homes. Irreversible is the fall, two bodies floating in the universe of their dreams and stories in reverse. How I love this idea of being plunged into those pupils that give me wings, as if each beat freed me a little more from the illusion of time. How I love this scene carried by the image of having fallen, voluntarily, into our gazes. Never to be hindered again running through the meanders of a staircase without regard.</p>
+    <p class="para">And in this fall, the seconds twist, the souls approach, the shadows accord, the tears border and our hearts bite, the echoes of our ideas resonate in the void, leaving memories that no impression could erase.</p>
+    <p class="para">Perhaps we exist only in this vertigo, a suspended illusion, where bodies are at once seized and freed, floating between the imaginary and reality. And in full fall, we rediscover the lightness of being, as if the earth no longer held us, and each beat was our flight toward the unknown.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(9)">← Previous</button>
+    <span class="foot-num" id="n10"></span>
+    <button class="foot-btn" onclick="go(11)">Next →</button>
+  </div>
+</div>
+
+<!-- 11. THE GAMBLER -->
+<div class="folio" data-p="11">
+  <div class="poem">
+    <p class="poem-title">The Gambler</p>
+    <br>
+    <p>The impulse submitted to the void</p>
+    <p>At the borders of silence</p>
+    <p>A sober man drowned in his own evanescence</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(10)">← Previous</button>
+    <span class="foot-num" id="n11"></span>
+    <button class="foot-btn" onclick="go(12)">Next →</button>
+  </div>
+</div>
+
+<!-- 12. TOMORROW -->
+<div class="folio" data-p="12">
+  <div class="poem">
+    <p class="poem-title">Tomorrow</p>
+    <br>
+    <p>The dead leaves on the ground</p>
+    <p>Whisper the words of a summer</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(11)">← Previous</button>
+    <span class="foot-num" id="n12"></span>
+    <button class="foot-btn" onclick="go(13)">Next →</button>
+  </div>
+</div>
+
+<!-- 13. A STARRY NIGHT -->
+<div class="folio" data-p="13">
+  <div class="poem">
+    <p class="poem-title">A Starry Night</p>
+    <br>
+    <p class="para">I spend the afternoon playing with my little sister, she is two years old, after football she demands her favourite cartoon. An hour later, mum comes home at the start of the evening. I embrace her then help to tidy up. After dinner, I make sure to stay, a sign of hospitality, like a brother, like a son, a presence matters and it has a degree.</p>
+    <p class="para">I go up to my brother's room, where I sleep before heading back to Paris. I watch a series and an old friend whispers in my ear that I am bored. I think back to my first love who is also my last. The pressure rises and a question returns, followed by an affirmation. How will I live again? I will live again. So I knew that I had lived, therefore I will live again.</p>
+    <p class="para">I realise I have regrets, not of having lived but of having forgotten to live, when I lived the best. Not having noticed the happiness, which passed me by like crossing a day off a calendar, as easily as a ray of sun pierces the water in a month of July.</p>
+    <p class="para">The old friend draws a diagram in my head, that of the man who knows how he will be reborn. He hands me in my hand, a leaf to roll, the one that will question my being. It is no longer my habit. Yet the lighter fights with the wind. The smoke dances before disappearing. The red signal is in my hands. It blinks from beginning to end. Consumes itself and converges with my ideas. The addiction will never return for each time it reminds me of my regrets. Yet here I am again playing with fire.</p>
+    <p class="para">It is dark, I am outside my house. Only the shadows of the trees. Only stars in a clear sky. I spent an hour observing them. Among one of them I saw the one that loves to travel at full speed. I had the chance to formulate a wish. Without any words, in my head an image. A presence I know. Regrets to revoke. A destiny perhaps, my will certainly.</p>
+    <p class="para">The clouds came to erase everything. This luminous tableau that everyone knows. One by one, their lights no longer reached me, until the last. It shone more than the others, it was the last target of the cloud circle that had taken the others. It let go of nothing, it kept shining. And all around joined it. The clouds could not resist. They returned to the sky the light that was trying to speak to me.</p>
+    <p class="para">The rebirth. A brilliance that could not give up. The determination of a glimmer of hope transforming into a starry night.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(12)">← Previous</button>
+    <span class="foot-num" id="n13"></span>
+    <button class="foot-btn" onclick="go(14)">Next →</button>
+  </div>
+</div>
+
+<!-- 14. DUST -->
+<div class="folio" data-p="14">
+  <div class="poem">
+    <p class="poem-title">Dust</p>
+    <br>
+    <p>I have always felt so small</p>
+    <p>Faced with the world that is vast</p>
+    <p>As for the universe that is infinite</p>
+    <p>The stars do nothing but laugh</p>
+    <p>The light plays tricks on my eyes</p>
+    <p>Fear plays tricks on my dreams</p>
+    <p>The rain mocks my moods</p>
+    <p>The sun feeds on my happiness</p>
+    <p>The dust gives me this grimace that I am like it</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(13)">← Previous</button>
+    <span class="foot-num" id="n14"></span>
+    <button class="foot-btn" disabled></button>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 15;
+  let cur = 0;
+
+  function go(n) {
+    document.querySelectorAll('.folio').forEach(f => f.classList.remove('active'));
+    document.querySelector(`[data-p="${n}"]`).classList.add('active');
+    cur = n;
+    setNums();
+    window.scrollTo(0, 0);
+  }
+
+  function setNums() {
+    for (let i = 1; i < TOTAL; i++) {
+      const el = document.getElementById('n' + i);
+      if (el) el.textContent = i + ' / ' + (TOTAL - 1);
+    }
+  }
+setNums();
+</script>
+</body>
+</html>

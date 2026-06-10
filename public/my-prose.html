@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma Prose (My Prose) — Noah Scheidler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f7f4ee;
+    --ink: #1c1a17;
+    --muted: #a09a92;
+    --max: 448px;
+  }
+
+  html, body {
+    min-height: 100%;
+    background: #f8f7f5;
+    padding: 3rem 1rem;
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .folio {
+    display: none;
+    min-height: calc(var(--max, 448px) * 1.5);
+    min-height: unset;
+        max-width: var(--max);
+    margin: 0 auto;
+    padding: 58px 36px 50px;
+    flex-direction: column;
+    animation: appear 0.4s ease;
+    background: var(--bg);
+    box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+
+  }
+
+  .folio.active { display: flex; }
+
+  @keyframes appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* COVER */
+  .folio-cover {
+    aspect-ratio: 2 / 3;
+    min-height: unset !important;
+    height: auto;
+    background: #ffffff;
+    min-height: 100vh;
+  }
+
+  .cover-top { margin-bottom: 20px; }
+
+  .cover-author-name {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #1c1a17;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+  }
+  .cover-mention {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #9a9288;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.04em;
+  }
+  .cover-h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin: 28px 0 12px;
+  }
+
+  .cover-sub {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .cover-epi {
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+
+  .cover-foot {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #e4dfd7;
+  }
+
+  .cover-pub {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* POEM */
+  .poem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poem p {
+    font-size: 0.9rem;
+    line-height: 1.95;
+    color: var(--ink);
+    margin-bottom: 1em;
+    text-align: left;
+  }
+
+  .poem p:last-child { margin-bottom: 0; }
+
+  /* FOOTER NAV */
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 36px;
+    margin-top: auto;
+  }
+
+  .foot-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .foot-btn:hover { color: var(--ink); }
+  .foot-btn:disabled { opacity: 0; pointer-events: none; }
+
+  .foot-num {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 85%; }
+    .folio { padding: 72px 28px 64px; }
+    .cover-author-name {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 2.24rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #1c1a17;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+  }
+  .cover-mention {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.92rem;
+    font-style: italic;
+    color: #9a9288;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.04em;
+  }
+  .cover-h1 { font-size: 1.90rem; }
+    .poem p { font-size: 0.97rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 0. COVER -->
+<div class="folio folio-cover active" data-p="0">
+  <div>
+    <p class="cover-author-name">Noah Scheidler</p>
+    <p class="cover-mention">Poetry Collection, Vol. 2</p>
+    <h1 class="cover-h1">Ma Prose</h1>
+  </div>
+  <p class="cover-epi" style="margin-top:auto;padding-bottom:28px">Let us stop living at the bottom among the rubble of our solitude,<br>
+    upward, let us join the blue sky of our laughter and our madness.</p>
+  <div class="cover-foot">
+    <span class="cover-pub">Self-published by the author</span>
+    <button class="foot-btn" onclick="go(1)">Read →</button>
+  </div>
+</div>
+
+<!-- 1. POEM 1 — PART A -->
+<div class="folio" data-p="1">
+  <div class="poem">
+    <p>The omnipresence of this green fairy ruins my mind with every knife blow dealt to my sacred soul, we light the green flower guiding us toward the madness of this absinthe.</p>
+    <p>My pen weeps at the pain of a storm, it flies through its thousand thanks to the favor and fervor of its drifting essence against the strong current of a compass lost among our nights of wonder.</p>
+    <p>We live so lost that our choices no longer answer to their own rationality, the harm we inflict on ourselves wraps itself in the wind of dark tides we have navigated in chains.</p>
+    <p>The forgetting of good times reaches its peak when doubt capsizes between our joys and our sorrows.</p>
+    <p>I listen to these piano notes that carry me to the edge of the horizon dissolving the blue of the water, in the middle of a nowhere where everything would tend to turn black.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(0)">← Back</button>
+    <span class="foot-num" id="n1"></span>
+    <button class="foot-btn" onclick="go(2)">Next →</button>
+  </div>
+</div>
+
+<!-- 2. POEM 1 — PART B -->
+<div class="folio" data-p="2">
+  <div class="poem">
+    <p>Alone I find myself, accompanied I feel, living off these colors of vivid joys distinguishing themselves in the fresco.</p>
+    <p>Empty months within me felt like an eternity of the vice of what you drink killing inside you.</p>
+    <p>Let us stop living at the bottom among the rubble of our solitude, upward, let us join the blue sky of our laughter and our madness, let us climb this mast unreachable to those sounds of debate.</p>
+    <p>The kinship of grief must be carried together to the summit of our worn edifice, with our gift for aphorism nothing can remain at the intermission of a poorly played piece.</p>
+    <p>So let us play since a role imprints itself into the real, the audience could not be distracted from my writings placed in abyme in the image of a being that comes alive.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(1)">← Previous</button>
+    <span class="foot-num" id="n2"></span>
+    <button class="foot-btn" onclick="go(3)">Next →</button>
+  </div>
+</div>
+
+<!-- 3. POEM 2 -->
+<div class="folio" data-p="3">
+  <div class="poem">
+    <p>The lord of darkness acquires your sleeping melodies, for his fascination with the world of wonders, for the nightmares lost in our dreamcatchers.</p>
+    <p>So we die the night before to come alive again the next day, for our fears are our greatest privileges.</p>
+    <p>I have beaten my sorrows, I have pursued my disarray, I have chased away my inner guests and fought for my rights as to the very existence of my paranoia, faced with my greatest unease which was none other than myself.</p>
+    <p>Confusion, enigmas and confessions rhyme in my head against the sound backdrop of a melancholy in which I shall be the protagonist.</p>
+    <p>The dramaturges descend only upon grey and overcast skies, ready to let the tears fall.</p>
+    <p>The erosion of feelings draws the storm, raise your arms!</p>
+    <p>Observe this breath and this wellbeing, your face and its head.</p>
+    <p>Like the flowers of spring having lived winter alone, drawing from the breeze of their beings.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(2)">← Previous</button>
+    <span class="foot-num" id="n3"></span>
+    <button class="foot-btn" onclick="go(4)">Next →</button>
+  </div>
+</div>
+
+<!-- 4. POEM 3 -->
+<div class="folio" data-p="4">
+  <div class="poem">
+    <p>The world is reborn from an abstract taste chained to doubts and pains that tip us into the effect of a transition defining all our interior secrets.</p>
+    <p>Finally I feel you, at first I thought you mimesis, during the twist of a journey called the youth of Bourgeoisie.</p>
+    <p>The decisive alternative defines no less of the traveler, to pursue these journeys at the risk of taking the best of the past, the comfort of the present and living without regret in the good days and in the greeting of happiness.</p>
+    <p>This rare attractiveness, a magnet and its fatality, without thinking and loving oneself too much, to the south she draws me and to the north she pulls me from this bruised convalescence, O great one I shall never attempt oblivion again.</p>
+    <p>For her I hold the most beautiful of flowers, warm and sheltered by my body, my ally, my effervescent heart set on realizing this drawing, in which our two vivid and joyful colors marry in a painting of perfect abstraction reflecting the mist with a silken hue, shining on the cold water of a mirror burning with the splinters of another time.</p>
+    <p>Who goes to the trouble for a cause with the aim of receiving something, if not love only to disappoint.</p>
+    <p>So moved, that one rediscovers through expression, that the grief of our story is the conductor of the prosperity of our art.</p>
+    <p style="margin-top:2.5em;font-style:italic;font-size:0.85rem;color:var(--muted);">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(3)">← Previous</button>
+    <span class="foot-num" id="n4"></span>
+    <button class="foot-btn" disabled></button>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 5;
+  let cur = 0;
+
+  function go(n) {
+    document.querySelectorAll('.folio').forEach(f => f.classList.remove('active'));
+    document.querySelector(`[data-p="${n}"]`).classList.add('active');
+    cur = n;
+    setNums();
+    window.scrollTo(0, 0);
+  }
+
+  function setNums() {
+    for (let i = 1; i < TOTAL; i++) {
+      const el = document.getElementById('n' + i);
+      if (el) el.textContent = i + ' / ' + (TOTAL - 1);
+    }
+  }
+setNums();
+</script>
+</body>
+</html>

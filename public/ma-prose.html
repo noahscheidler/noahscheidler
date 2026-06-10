@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ma Prose — Noah Scheidler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f7f4ee;
+    --ink: #1c1a17;
+    --muted: #a09a92;
+    --max: 448px;
+  }
+
+  html, body {
+    min-height: 100%;
+    background: #f8f7f5;
+    padding: 3rem 1rem;
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .folio {
+    display: none;
+    min-height: calc(var(--max, 448px) * 1.5);
+    min-height: unset;
+        max-width: var(--max);
+    margin: 0 auto;
+    padding: 58px 36px 50px;
+    flex-direction: column;
+    animation: appear 0.4s ease;
+    background: var(--bg);
+    box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+
+  }
+
+  .folio.active { display: flex; }
+
+  @keyframes appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* COVER */
+  .folio-cover {
+    aspect-ratio: 2 / 3;
+    min-height: unset !important;
+    height: auto;
+    background: #ffffff;
+    min-height: 100vh;
+  }
+
+  .cover-top { margin-bottom: 20px; }
+
+  .cover-author-name {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #1c1a17;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+  }
+  .cover-mention {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #9a9288;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.04em;
+  }
+  .cover-h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin: 28px 0 12px;
+  }
+
+  .cover-sub {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .cover-epi {
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+
+  .cover-foot {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #e4dfd7;
+  }
+
+  .cover-pub {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* POEM */
+  .poem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poem p {
+    font-size: 0.9rem;
+    line-height: 1.95;
+    color: var(--ink);
+    margin-bottom: 1em;
+    text-align: left;
+  }
+
+  .poem p:last-child { margin-bottom: 0; }
+
+  .poem p.gap { margin-top: 0.6em; }
+
+  /* FOOTER NAV */
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 36px;
+    margin-top: auto;
+  }
+
+  .foot-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .foot-btn:hover { color: var(--ink); }
+  .foot-btn:disabled { opacity: 0; pointer-events: none; }
+
+  .foot-num {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 85%; }
+    .folio { padding: 72px 28px 64px; }
+    .cover-author-name {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 2.24rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #1c1a17;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+  }
+  .cover-mention {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.92rem;
+    font-style: italic;
+    color: #9a9288;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.04em;
+  }
+  .cover-h1 { font-size: 1.90rem; }
+    .poem p { font-size: 0.97rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 0. COUVERTURE -->
+<div class="folio folio-cover active" data-p="0">
+  <div>
+    <p class="cover-author-name">Noah Scheidler</p>
+    <p class="cover-mention">Recueil de poèmes, Vol. 2</p>
+    <h1 class="cover-h1">Ma Prose</h1>
+  </div>
+  <p class="cover-epi" style="margin-top:auto;padding-bottom:28px">Cessons de vivre d'en bas aux décombres de notre solitude,<br>
+    en haut, rejoignons le ciel bleu de nos rires et délires.</p>
+  <div class="cover-foot">
+    <span class="cover-pub">Autopublié par l'auteur</span>
+    <button class="foot-btn" onclick="go(1)">Lire →</button>
+  </div>
+</div>
+
+<!-- 1. POÈME 1 — PARTIE A -->
+<div class="folio" data-p="1">
+  <div class="poem">
+    <p>L'omniprésence de cette fée verte m'abîme l'esprit à chaque coup de couteau porté à mon âme sainte, nous allumons la fleur verte nous dirigeant à la folie de cette absinthe.</p>
+    <p>Ma plume pleurt aux douleurs d'un ouragan, elle vole à travers ses mille mercis à la faveur et la ferveur de son essence vaguante au courant fort d'une boussole désorientée de nos nuits émerveillées.</p>
+    <p>Nous vivons si perdus qu'alors nos choix n'en sont plus à leurs rationalités, le mal qu'on s'inflige s'enveloppe du vent des marrés sombres que nous avons naviguées à la chaîne.</p>
+    <p>L'oublie du beau temps est à son comble lorsque le doute chavire entre nos joies et nos peines.</p>
+    <p>J'écoute ces notes de piano qui m'emmène au bout de l'horizon dissipant le bleu de l'eau, au milieu d'un nul part tout aurait tendance à devenir noir.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(0)">← Retour</button>
+    <span class="foot-num" id="n1"></span>
+    <button class="foot-btn" onclick="go(2)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 2. POÈME 1 — PARTIE B -->
+<div class="folio" data-p="2">
+  <div class="poem">
+    <p>Seul je me trouve, accompagné je me sens, vivant de ces couleurs de vives joies se distinguant dans la fresque.</p>
+    <p>Des mois vides en moi m'ont paru éternité du vice de ce que tu bois tue en toi.</p>
+    <p>Cessons de vivre d'en bas aux décombres de notre solitude, en haut, rejoignons le ciel bleu de nos rires et délires, grimpons sur ce mât inaccessible à ces sons de débat.</p>
+    <p>L'affiliation du chagrin se doit d'être porté ensemble au sommet de notre édifice éraillé, à notre don d'aphorisme rien ne peut rester à l'entracte d'une pièce mal jouée.</p>
+    <p>Alors jouons puisqu'un rôle s'empreinte jusqu'au réel, le public ne pourrait se distraire de mes écrits mise en abymes à l'image d'un être qui s'anime.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(1)">← Précédent</button>
+    <span class="foot-num" id="n2"></span>
+    <button class="foot-btn" onclick="go(3)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 3. POÈME 2 -->
+<div class="folio" data-p="3">
+  <div class="poem">
+    <p>Le seigneur des ténèbres s'acquiert de tes mélodies dormantes, pour sa fascination du monde des merveilles, pour les cauchemars égarés de nos attrapes rêves.</p>
+    <p>Alors on meurt la veille pour revivre le lendemain, car nos craintes sont nos plus grands privilèges.</p>
+    <p>J'ai battu mes peines, j'ai poursuivi mes désarrois, j'ai chassé mes convives intérieurs et j'ai lutté mes droits quant à l'existence même de ma paranoïa, face à mon plus grand mal être qui n'était que moi.</p>
+    <p>Confusion, énigmes et confessions riment dans ma tête au fond sonore d'une mélancolie où j'en serai le protagoniste.</p>
+    <p>Les dramaturges s'abattent seulement sur les ciels gris et brouillés, prêt à découler les larmes.</p>
+    <p>L'érosion de sentiments attire la tempête, levez vos armes !</p>
+    <p>Observez ce souffle et ce bien être, ton visage et sa tête.</p>
+    <p>Telles des fleurs du printemps ayant vécu l'hiver seul, en exploitant la brise de leurs êtres.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(2)">← Précédent</button>
+    <span class="foot-num" id="n3"></span>
+    <button class="foot-btn" onclick="go(4)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 4. POÈME 3 -->
+<div class="folio" data-p="4">
+  <div class="poem">
+    <p>Le monde renaît de goût abstrait enchaîné de doutes et de douleurs qui nous basculent à l'effet d'une transition définissant tout nos secrets intérieurs.</p>
+    <p>Enfin je te sens, en début je te croyais mimésis, pendant la péripétie d'un voyage appelé jeunesse de Bourgeoisie.</p>
+    <p>L'alternative décisionnelle n'en définit pas moins du voyageur, poursuivre ces périples aux risques de prendre le meilleur du passé, le confort du présent et vivre sans regret aux beaux jours et au bonjour du bonheur.</p>
+    <p>Cette attractivité rare, un aimant et sa fatalité, sans penser et trop s'aimer, au sud elle m'attire et au nord elle me tire de cette convalescence meurtri, Ô grand plus jamais je tenterai l'oubli.</p>
+    <p>J'ai pour elle la plus belle des fleurs, chaude et protéger de mon corps, mon allié, mon coeur effervescent décidé à réaliser ce dessin, dans lequel nos deux couleurs vives et joyeuses se marient dans une peinture à l'abstraction parfaite du reflet des brumes au teint de soie, brillant sur l'eau froide d'un miroir brûlant aux éclats d'autrefois.</p>
+    <p>Qui se donne du mal pour une cause à but d'en recevoir, si ce n'est l'amour à décevoir.</p>
+    <p>Si poussé, qu'on redécouvre par l'expression, que le chagrin de notre histoire est conducteur à la prospérité de notre art.</p>
+    <p style="margin-top:2.5em;font-style:italic;font-size:0.85rem;color:var(--muted);">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(3)">← Précédent</button>
+    <span class="foot-num" id="n4"></span>
+    <button class="foot-btn" disabled></button>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 5;
+  let cur = 0;
+
+  function go(n) {
+    document.querySelectorAll('.folio').forEach(f => f.classList.remove('active'));
+    document.querySelector(`[data-p="${n}"]`).classList.add('active');
+    cur = n;
+    setNums();
+    window.scrollTo(0, 0);
+  }
+
+  function setNums() {
+    for (let i = 1; i < TOTAL; i++) {
+      const el = document.getElementById('n' + i);
+      if (el) el.textContent = i + ' / ' + (TOTAL - 1);
+    }
+  }
+setNums();
+</script>
+</body>
+</html>

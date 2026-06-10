@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Traversées — Noah Scheidler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f7f4ee;
+    --ink: #1c1a17;
+    --muted: #a09a92;
+    --max: 448px;
+  }
+
+  html, body {
+    min-height: 100%;
+    background: #f8f7f5;
+    padding: 3rem 1rem;
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .folio {
+    display: none;
+    min-height: calc(var(--max, 448px) * 1.5);
+    min-height: unset;
+        max-width: var(--max);
+    margin: 0 auto;
+    padding: 58px 36px 50px;
+    flex-direction: column;
+    animation: appear 0.4s ease;
+    background: var(--bg);
+    box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+
+  }
+
+  .folio.active { display: flex; }
+
+  @keyframes appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .folio-cover {
+    aspect-ratio: 2 / 3;
+    min-height: unset !important;
+    height: auto;
+    background: #ffffff;
+    box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+    min-height: 100vh;
+  }
+
+  .cover-author-name {
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #1c1a17;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+  }
+
+  .cover-mention {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #9a9288;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.04em;
+  }
+
+  .cover-h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin: 28px 0 12px;
+  }
+
+  .cover-epi {
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+
+  .cover-foot {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #e4dfd7;
+  }
+
+  .cover-pub {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .poem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poem-title {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.2rem;
+  }
+
+  .poem p {
+    font-size: 0.9rem;
+    line-height: 1.95;
+    color: var(--ink);
+    margin-bottom: 0.2em;
+    text-align: left;
+  }
+
+  .poem p.para {
+    margin-bottom: 1em;
+  }
+
+  .poem p.para:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .poem p.gap {
+    margin-top: 1.2em;
+  }
+
+  .poem p.signature {
+    margin-top: 2.5em;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 36px;
+    margin-top: auto;
+  }
+
+  .foot-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .foot-btn:hover { color: var(--ink); }
+  .foot-btn:disabled { opacity: 0; pointer-events: none; }
+
+  .foot-num {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 85%; }
+    .folio { padding: 72px 28px 64px; }
+    .cover-h1 { font-size: 2.24rem; }
+    .poem p { font-size: 0.97rem; }
+  }
+</style>
+</head>
+<body>
+<!-- Page 0 -->
+<div class="folio folio-cover active" data-p="0">
+  <div>
+    <p class="cover-author-name">Noah Scheidler</p>
+    <p class="cover-mention">Journal de poèmes</p>
+    <h1 class="cover-h1">Traversées</h1>
+  </div>
+  <p class="cover-epi" style="margin-top:auto;padding-bottom:28px">De l'épine à la poussière,<br>un journal intime en vers.</p>
+  <div class="cover-foot">
+    <span class="cover-pub">Autopublié par l'auteur</span>
+    <button class="foot-btn" onclick="go(1)">Lire →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 1 -->
+<div class="folio" data-p="1">
+  <div class="poem">
+    <p class="poem-title">L'épine</p>
+    <br>
+    <p class="para">Dans une balade au plein milieu d'un brasier. Tout est mourant autour de moi. Mais j'observe au loin, une brume qui attire ma curiosité. Elle se distingue de la fumée que j'ai pu apercevoir tout au long de mon périple dans les flammes. Elle est plus lourde, plus convaincante, il y a quelque chose qui me captive. Un élément spécial la compose. En une fraction de seconde, un chemin se fraye devant moi, une lumière au bout du tunnel. Alors je l'emprunte et les obstacles s'inclinent face à mon envie d'elle.</p>
+    <p class="para">En m'approchant, mon regard croise celui d'une fleur, encore vivante aux abords des flammes. Elle scintille de mille feux, s'enveloppant d'un vent froid dont la couverture est presque magnétique et envoûtante. Peut-être me suis-je aventuré dans l'œil du cyclone. Il y a face à moi, probablement au centre de ce désarroi, la chaleur la plus agréable de cet endroit.</p>
+    <p class="para">Je ne sais pas si je dois sauver cette fleur de cet environnement hostile ou si son élément lui convient. Il se pourrait qu'elle en soit la source ou bien s'est-elle simplement retrouvée là.</p>
+    <p class="para">Jusqu'ici, une torche m'a protégé de cet incendie, un bâton qui s'enflamme pour en écarter les autres. Plus j'ai approché ma torche dans ce brouillard et plus la flamme qui me protégeait s'est davantage estompée devant mes yeux face au caractère chimique de ce miracle qui se tient devant moi. Je me retrouve à découvert. Je crois que j'ai peur. Je n'ai plus besoin de me protéger. Mon paradoxe en a trouvé un plus puissant. Je connais parfaitement mes émotions et pour une fois je suis complètement perdu et guidé en un même moment. La confusion se transforme en une quête. Je sais où aller, je ne veux plus me balader dans cette hostilité. Je décide d'en finir. Dans l'hypothèse où j'ai moi-même déclenché le feu dans lequel je me balade, je me suis retrouvé face au seul être qui a survécu à mes flammes. Je ne l'aurais jamais trouvée si rien ne brûlait. C'est le temps qui m'y a emmené. Nos énergies s'y sont retrouvées.</p>
+    <p class="para">Un simple instant de réalisation ; entre le contact visuel et le mouvement de mon bras vers son corps mystérieux. Mes yeux et une rose. Ma main et une épine. Je la pique du sol, elle est douce. Je saigne mais ma blessure est telle que mon incompréhension.</p>
+    <p class="para">Lorsque je l'ai cueillie, le temps s'est arrêté. Les étincelles flottent dans l'air et l'embrasement s'est figé comme un tableau. Je tiens cette rose et ces épines. Je suis émergé de bonheur, je regarde ce tableau et je suis pris d'un attrait de fascination. C'est la danse de l'eau et du feu. Le contact de cette fleur m'offre une perspective de création infinie. Désormais je me balade dans une peinture. Des flammes statiques, un brouillard qui flotte et une explosion lumineuse au centre de la composition. La danse progresse et l'œuvre oublie le périple des flammes, la lumière s'empare du tableau qui devient blanc, presque vierge.</p>
+    <p class="para">Il ne reste plus rien autour, à l'exception de ma main qui tient ma rose dans ces épines.</p>
+    <p class="para">J'inverse la main dans laquelle je la tiens. Et je signe en rouge sur cette page blanche le mot amour.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(0)">← Retour</button>
+    <span class="foot-num" id="n1"></span>
+    <button class="foot-btn" onclick="go(2)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 2 -->
+<div class="folio" data-p="2">
+  <div class="poem">
+    <p class="poem-title">L'étincelle</p>
+    <br>
+    <p>C'était une histoire digne d'un film, un court épisode inattendu, dans l'énergie brûlante d'une énigme pleine de rebondissements</p>
+    <p>C'est un moment que je garderai dans mon esprit et qui à jamais, m'aura détruit</p>
+    <p>La lumière s'estompe, fond, s'éloigne</p>
+    <p>Un peu plus à chaque fois</p>
+    <p>Je suis le vide, noir</p>
+    <p>Elle est la comète, rapide et furieuse, l'ange déchu d'un rêve en deuil</p>
+    <p>Sans avoir eu le temps de converser, il s'était déjà défenestré</p>
+    <p>Un nuage abandonné</p>
+    <p>Tandis que je m'envole, ses ailes tombent vers le sol</p>
+    <p>Le brouillard gronde loin au-delà des ombres</p>
+    <p>J'ai été aveuglé par une lumière que je n'ai qu'aperçu</p>
+    <p>Pour n'en devenir qu'un souvenir</p>
+    <p>Éboulis</p>
+    <p>De magie, de chimie</p>
+    <p>Nous nous sommes simplement croisés.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(1)">← Précédent</button>
+    <span class="foot-num" id="n2"></span>
+    <button class="foot-btn" onclick="go(3)">Suivant →</button>
+  </div>
+</div>
+
+<!-- Page 3 -->
+<div class="folio" data-p="3">
+  <div class="poem">
+    <p class="poem-title">La rupture</p>
+    <br>
+    <p>J'ai retenu les larmes de glisser sur ma poitrine</p>
+    <p>Le froid a pénétré le chaud</p>
+    <p>Le fond de l'âme où réside les flammes de l'ego</p>
+    <p>Le tout a transpercé ma peau</p>
+    <p>Trop tard, la cascade m'emporte, les oiseaux fuient et les nuages me hantent</p>
+    <p>Une averse approche</p>
+    <p>Je subis le tourment des saisons</p>
+    <p>Je me suis préparé pour cette inondation, toute ma contenance s'est liquéfiée sur le long de mon corps</p>
+    <p>À travers les fleurs et la boisson</p>
+    <p>Mes vêtements et mes passions</p>
+    <p>Mon visage sec est devenu mouillé de mes soupirs et craquements</p>
+    <p>C'est le sort que l'on m'a réservé</p>
+    <p>Pour le caprice de mes sentiments</p>
+    <p>Les larmes ont coulé</p>
+    <p>Je n'en suis plus qu'un excédent</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(2)">← Précédent</button>
+    <span class="foot-num" id="n3"></span>
+    <button class="foot-btn" onclick="go(4)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 5 -->
+<div class="folio" data-p="4">
+  <div class="poem">
+    <p class="poem-title">La nouvelle</p>
+    <br>
+    <p>Elle m'a emmené dans son rêve, là où elle me l'a laissé à moi-même</p>
+    <p>Son cœur cherchait à être brisé, je n'ai pas pu</p>
+    <p>Alors elle se l'est brisé toute seule</p>
+    <p>Une vision nocturne</p>
+    <p>La silhouette d'une amoureuse</p>
+    <p>Un réveil cardiaque</p>
+    <p>Jamais je n'aurais cru que la terre pouvait tourner aussi vite</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(3)">← Précédent</button>
+    <span class="foot-num" id="n4"></span>
+    <button class="foot-btn" onclick="go(5)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 6 -->
+<div class="folio" data-p="5">
+  <div class="poem">
+    <p class="poem-title">L'abandon</p>
+    <br>
+    <p>J'étais prêt à tous les sacrifices pour elle</p>
+    <p>Elle m'a donc sacrifié</p>
+    <p>L'acte le plus grandiose que je peux réaliser est de ne rien faire</p>
+    <p>Je me suis déjà battu et j'ai perdu</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(4)">← Précédent</button>
+    <span class="foot-num" id="n5"></span>
+    <button class="foot-btn" onclick="go(6)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 7 -->
+<div class="folio" data-p="6">
+  <div class="poem">
+    <p class="poem-title">Rancœur</p>
+    <br>
+    <p>Je me méfie de l'amour</p>
+    <p>Car je crois aux sorcières et aux sorciers</p>
+    <p>Les magiciens pourrait-on les appeler</p>
+    <p>Ce jeu se vit de la mort</p>
+    <p>Des étincelles mises en scène</p>
+    <p>Au gré d'un tour d'illusion</p>
+    <p>Un frisson fait son deuil</p>
+    <p>Le cœur palpite</p>
+    <p>S'est fait trompé</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(5)">← Précédent</button>
+    <span class="foot-num" id="n6"></span>
+    <button class="foot-btn" onclick="go(7)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 8 -->
+<div class="folio" data-p="7">
+  <div class="poem">
+    <p class="poem-title">L'origine</p>
+    <br>
+    <p>La mère est un grand chêne</p>
+    <p>Il est une feuille, détaché de son arbre</p>
+    <p>Il est né quand il s'est envolé</p>
+    <p>Qu'aura-t-il raconté ? Avant de tomber sur la terre</p>
+    <p>Lui offrir toute ta matière</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(6)">← Précédent</button>
+    <span class="foot-num" id="n7"></span>
+    <button class="foot-btn" onclick="go(8)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 9 -->
+<div class="folio" data-p="8">
+  <div class="poem">
+    <p class="poem-title">Un élément</p>
+    <br>
+    <p>Avant de faire un pas en avant</p>
+    <p>J'aime reculer d'un pas en arrière</p>
+    <p>Pour avancer d'un grand élan</p>
+    <p>Je m'écrase sur le sol pour bondir dans les airs</p>
+    <p>Bénévole des sentiments</p>
+    <p>L'état est une danse</p>
+    <p>Un esprit bel et bien vivant</p>
+    <p>Au beau milieu du vide</p>
+    <p>Dans une sphère</p>
+    <p>La terre n'est qu'un vent pour ce que l'âme n'est qu'un chant</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(7)">← Précédent</button>
+    <span class="foot-num" id="n8"></span>
+    <button class="foot-btn" onclick="go(9)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 10 -->
+<div class="folio" data-p="9">
+  <div class="poem">
+    <p class="poem-title">L'oiseau</p>
+    <br>
+    <p>Mes ailes déployées</p>
+    <p>Au rebord de la fenêtre tu m'as rejoint</p>
+    <p>Puis tu es parti</p>
+    <p>Chavirer vers celui qui t'a fait naviguer</p>
+    <p>Je ne suis qu'un naufragé de mes pensées</p>
+    <p>Un aveugle aurait vu sous tes lauriers</p>
+    <p>La lumière que je n'ai su témoigner</p>
+    <p>Pris au piège dans une de tes plumes égarées</p>
+    <p>Le vent m'a emporté loin</p>
+    <p>Le vent te viendra peut-être de venir la récupérer</p>
+    <p>Au voleur qui a arraché ton cœur</p>
+    <p>Cette lettre que l'oiseau n'a jamais postée</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(8)">← Précédent</button>
+    <span class="foot-num" id="n9"></span>
+    <button class="foot-btn" onclick="go(10)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 11 -->
+<div class="folio" data-p="10">
+  <div class="poem">
+    <p class="poem-title">L'escalier de Penrose</p>
+    <br>
+    <p class="para">Après la rencontre d'une marche invisible, nous voilà tombés dans un vide inexplicable, rempli de désirs infinis, où prisonniers nous en faisons la meilleure des maisons. Irréversible est la chute, deux corps flottant dans l'univers de leurs rêves et histoires à l'envers. Que j'aime cette idée d'être plongé dans ces pupilles qui me donnent des ailes, comme si chaque battement me libérait un peu plus de l'illusion du temps. Que j'aime cette scène portée par l'image d'être tombé, volontairement, dans nos regards. Pour ne jamais plus s'entraver à courir dans les méandres d'un escalier sans égard.</p>
+    <p class="para">Et dans cette chute, les secondes se tordent, les âmes s'abordent, les ombres s'accordent, les larmes se bordent et nos cœurs se mordent, les échos de nos idées résonnent dans le vide, laissant des souvenirs qu'aucune impression ne pourrait effacer.</p>
+    <p class="para">Peut-être n'existons-nous que dans ce vertige, une illusion suspendue, où les corps sont à la fois pris et libérés, flottant entre l'imaginaire et la réalité. Et en pleine chute, nous redécouvrons la légèreté d'être, comme si la terre ne nous retenait plus, et que chaque battement était notre envol vers l'inconnu.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(9)">← Précédent</button>
+    <span class="foot-num" id="n10"></span>
+    <button class="foot-btn" onclick="go(11)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 12 -->
+<div class="folio" data-p="11">
+  <div class="poem">
+    <p class="poem-title">Le parieur</p>
+    <br>
+    <p>L'élan soumis au vide</p>
+    <p>Aux frontières du silence</p>
+    <p>Un sobre noyé dans son évanescence</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(10)">← Précédent</button>
+    <span class="foot-num" id="n11"></span>
+    <button class="foot-btn" onclick="go(12)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 13 -->
+<div class="folio" data-p="12">
+  <div class="poem">
+    <p class="poem-title">Demain</p>
+    <br>
+    <p>Les feuilles mortes au sol</p>
+    <p>Chuchotent les mots d'un été</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(11)">← Précédent</button>
+    <span class="foot-num" id="n12"></span>
+    <button class="foot-btn" onclick="go(13)">Suivant →</button>
+  </div>
+</div>
+
+</div>
+
+<!-- Page 14 -->
+<div class="folio" data-p="13">
+  <div class="poem">
+    <p class="poem-title">Une nuit étoilée</p>
+    <br>
+    <p class="para">Je passe l'après-midi à jouer avec ma petite sœur, elle a deux ans, après le foot, elle réclame son dessin animé préféré. Une heure passée, maman rentre en début de soirée. Je l'embrasse puis j'aide à ranger. Après le dîner, je fais en sorte de rester, un signe d'hospitalité, comme un frère, comme un fils, une présence compte et elle a un degré.</p>
+    <p class="para">Je monte dans la chambre de mon frère, là où je dors avant de repartir à Paris. Je regarde une série et un vieil ami me chuchote à l'oreille que je m'ennuie. Je repense à mon premier amour qui est aussi mon dernier. La pression monte et une question revient, suivie d'une affirmation. Comment vais-je revivre ? Je vais revivre. Ainsi j'ai su que j'ai vécu, donc je revivrai.</p>
+    <p class="para">Je réalise que j'ai des regrets, non pas d'avoir vécu mais d'avoir oublié de vivre, quand j'ai vécu le mieux. Ne m'être pas rendu compte du bonheur, qui m'est passé comme on raye un jour du calendrier, aussi facilement qu'un rayon de soleil transperce l'eau un mois de juillet.</p>
+    <p class="para">Le vieil ami me dessine un schéma dans la tête, celui de l'homme qui sait comment il va renaître. Il me tend dans la main, une feuille à rouler, celle qui va questionner mon être. Ça n'est plus dans mes habitudes. Pourtant le briquet se bat avec le vent. La fumée danse avant de disparaître. Le signal rouge est dans mes mains. Il clignote du début à la fin. Se consume et congrue à mes idées. L'addiction ne reviendra jamais car chaque fois elle me rappelle mes regrets. Pourtant me voilà encore en train de jouer avec le feu.</p>
+    <p class="para">Il fait noir, je suis devant ma maison. Seulement les ombres des arbres. Seulement des étoiles d'un ciel dégagé. J'ai passé une heure à les observer. Parmi l'une d'entre elles, j'ai vu celle qui aime voyager à toute vitesse. J'ai eu la chance de pouvoir formuler un vœu. Sans aucun mot, dans ma tête une image. Une présence que je connais. Des regrets à révoquer. Une destinée peut-être, ma volonté sûrement.</p>
+    <p class="para">Les nuages sont venus tout effacer. Ce tableau lumineux que tout le monde connaît. Une par une, leurs lumières ne me parvenaient plus, jusqu'à la dernière. Elle brillait plus que les autres, elle était la dernière cible du cercle nuageux qui a emporté les autres. Elle n'a rien lâché, elle continuait de briller. Et toutes autour l'ont rejoint. Les nuages n'ont su résister. Ils ont rendu au ciel la lumière qui essayait de me parler.</p>
+    <p class="para">La renaissance. Une brillance qui n'a su renoncer. La détermination d'une lueur d'espoir se transformant en une nuit étoilée.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(12)">← Précédent</button>
+    <span class="foot-num" id="n13"></span>
+    <button class="foot-btn" onclick="go(14)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 15. POUSSIÈRE -->
+<div class="folio" data-p="14">
+  <div class="poem">
+    <p class="poem-title">Poussière</p>
+    <br>
+    <p>J'ai toujours eu l'impression d'être si petit</p>
+    <p>Face au monde qui est vaste</p>
+    <p>Quant à l'univers qui est infini</p>
+    <p>Les étoiles ne font que rire</p>
+    <p>La lumière joue des tours à mes yeux</p>
+    <p>La peur joue des tours à mes rêves</p>
+    <p>La pluie se moque de mes humeurs</p>
+    <p>Le soleil se nourrit de mon bonheur</p>
+    <p>La poussière me donne cette grimace que je suis comme elle</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(13)">← Précédent</button>
+    <span class="foot-num" id="n14"></span>
+    <button class="foot-btn" disabled></button>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 15;
+  let cur = 0;
+
+  function go(n) {
+    document.querySelectorAll('.folio').forEach(f => f.classList.remove('active'));
+    document.querySelector(`[data-p="${n}"]`).classList.add('active');
+    cur = n;
+    setNums();
+    window.scrollTo(0, 0);
+  }
+
+  function setNums() {
+    for (let i = 1; i < TOTAL; i++) {
+      const el = document.getElementById('n' + i);
+      if (el) el.textContent = i + ' / ' + (TOTAL - 1);
+    }
+  }
+setNums();
+</script>
+</body>
+</html>

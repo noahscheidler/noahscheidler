@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Thought — Noah Scheidler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f7f4ee;
+    --ink: #1c1a17;
+    --muted: #a09a92;
+    --max: 448px;
+  }
+
+  html, body {
+    min-height: 100%;
+    background: #f8f7f5;
+    padding: 3rem 1rem;
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .folio {
+    display: none;
+    min-height: calc(var(--max, 448px) * 1.5);
+    min-height: unset;
+        max-width: var(--max);
+    margin: 0 auto;
+    padding: 58px 36px 50px;
+    flex-direction: column;
+    animation: appear 0.4s ease;
+    background: var(--bg);
+    box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+
+  }
+
+  .folio.active { display: flex; }
+
+  @keyframes appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  /* COVER */
+  .folio-cover {
+    aspect-ratio: 2 / 3;
+    min-height: unset !important;
+    height: auto;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    padding: 0 !important;
+    justify-content: flex-end !important;
+  }
+  .cover-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    display: block;
+  }
+  .cover-gradient-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 55%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
+  }
+  .cover-gradient-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 45%;
+    background: linear-gradient(to top, rgba(0,0,0,0.90) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0) 100%);
+    pointer-events: none;
+  }
+  .cover-text-top {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 36px 40px 0;
+    z-index: 2;
+  }
+  .cover-text-bottom {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 0 40px 32px;
+    z-index: 2;
+  }
+
+  .cover-top { margin-bottom: 20px; }
+
+  .cover-author-name {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #1c1a17;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+  }
+  .cover-mention {
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #9a9288;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.04em;
+  }
+  .cover-h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin: 28px 0 12px;
+  }
+
+  .cover-sub {
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    color: var(--ink);
+    margin-bottom: 20px;
+  }
+
+  .cover-rule {
+    width: 28px;
+    height: 1px;
+    background: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .cover-epi {
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+
+  .cover-foot {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #e4dfd7;
+  }
+
+  .cover-pub {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* POEM PAGES */
+  .poem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .poem p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--ink);
+  }
+
+  .poem p.gap { margin-top: 1.6em; }
+  .poem p.alone { margin-top: 2.4em; font-style: italic; color: var(--muted); }
+  .poem p.caps { font-size: 1.05rem; letter-spacing: 0.05em; }
+  .poem p.signature { margin-top: 3.5em; font-style: italic; font-size: 0.9rem; color: var(--muted); letter-spacing: 0.05em; }
+
+  /* FOOTER NAV */
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 36px;
+    margin-top: auto;
+  }
+
+  .foot-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .foot-btn:hover { color: var(--ink); }
+  .foot-btn:disabled { opacity: 0; pointer-events: none; }
+
+  .foot-num {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 85%; }
+    .folio { padding: 72px 28px 64px; }
+    .cover-author-name {
+      font-size: 1.72rem;
+      text-shadow: 0 2px 18px rgba(0,0,0,1), 0 1px 6px rgba(0,0,0,1), 0 4px 32px rgba(0,0,0,0.95);
+    }
+    .cover-mention {
+      font-size: 0.71rem;
+      text-shadow: 0 1px 8px rgba(0,0,0,1), 0 2px 16px rgba(0,0,0,1);
+    }
+    .cover-h1 {
+      font-size: 2.16rem;
+      text-shadow: 0 2px 20px rgba(0,0,0,1), 0 1px 6px rgba(0,0,0,1), 0 4px 40px rgba(0,0,0,0.95);
+    }
+    .cover-epi {
+      font-size: 0.79rem;
+      text-shadow: 0 2px 14px rgba(0,0,0,1), 0 1px 5px rgba(0,0,0,1), 0 4px 28px rgba(0,0,0,0.95);
+    }
+    .cover-pub { font-size: 0.52rem; }
+    .folio-cover .foot-btn { font-size: 0.79rem; }
+    .cover-gradient-top { height: 65%; background: linear-gradient(to bottom, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0) 100%); }
+    .cover-gradient-bottom { height: 55%; background: linear-gradient(to top, rgba(0,0,0,0.97) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0) 100%); }
+    .poem p { font-size: 0.97rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 0. COVER -->
+<div class="folio folio-cover active" data-p="0">
+  <img src="/writings/une-pensee-cover.jpg" alt="" class="cover-image" />
+  <div class="cover-gradient-top"></div>
+  <div class="cover-gradient-bottom"></div>
+
+  <div class="cover-text-top">
+    <p class="cover-author-name" style="color:#fff;text-shadow:0 2px 12px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.9)">Noah Scheidler</p>
+    <p class="cover-mention" style="color:rgba(255,255,255,0.65)">Poetry Collection, Vol. 1</p>
+    <h1 class="cover-h1" style="color:#fff;text-shadow:0 2px 16px rgba(0,0,0,0.9), 0 1px 4px rgba(0,0,0,0.9)">Une Pensée</h1>
+  </div>
+
+  <div class="cover-text-bottom">
+    <p class="cover-epi" style="color:rgba(255,255,255,0.8);text-shadow:0 2px 10px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.9);margin-bottom:20px">A life is the story of your thoughts, so write it.</p>
+    <div class="cover-foot" style="border-top:1px solid rgba(255,255,255,0.2);padding-top:16px">
+      <span class="cover-pub" style="color:rgba(255,255,255,0.5)">Self-published by the author</span>
+      <button class="foot-btn" onclick="go(1)">Read →</button>
+    </div>
+  </div>
+</div>
+
+<!-- 1. POEM 1 -->
+<div class="folio" data-p="1">
+  <div class="poem">
+    <p>I was born happy</p>
+    <p>Thanks to mum</p>
+    <p>So we will do better and better still</p>
+    <p>Creating is the most beautiful thing</p>
+    <p>That makes failure just as much so</p>
+    <p>To fail, then do it better because we must succeed</p>
+    <p>Never doubt again and be sure of oneself</p>
+    <p>To feed on one's suffering</p>
+    <p>To know where we come from and where we want to go</p>
+    <p>To repair our mistakes or move forward with them</p>
+    <p>To stop at no failure</p>
+    <p>To believe and begin again, begin again...</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(0)">← Back</button>
+    <span class="foot-num" id="n1"></span>
+    <button class="foot-btn" onclick="go(2)">Next →</button>
+  </div>
+</div>
+
+<!-- 2. POEM 2 -->
+<div class="folio" data-p="2">
+  <div class="poem">
+    <p>I met a girl who marked me.</p>
+    <p>I know down to the smallest detail what I love and what I cannot stand.</p>
+    <p>But above all, I know where I am going.</p>
+    <p class="gap">Because where I had never seen it before, I found a meaning to my life.</p>
+    <p>And I am no longer afraid of anything concerning myself,</p>
+    <p>if not the world that surrounds us.</p>
+    <p class="gap">But we have nothing to do with it, we live in a false and manipulative system.</p>
+    <p>A globally magnificent place overrun with productivity and wealth,</p>
+    <p>but what does it put above all of that:</p>
+    <p>exploitation. crime of every kind. racism. injustice.</p>
+    <p class="gap">Factors driven by money and human horror.</p>
+    <p>Simply, there are actors and there are spectators.</p>
+    <p>All working in the service of their interests or beliefs.</p>
+    <p>Multiple and diverse, that is the world.</p>
+    <p>To be unique is to be yourself.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(1)">← Previous</button>
+    <span class="foot-num" id="n2"></span>
+    <button class="foot-btn" onclick="go(3)">Next →</button>
+  </div>
+</div>
+
+<!-- 3. POEM 3 -->
+<div class="folio" data-p="3">
+  <div class="poem">
+    <p>What would it feel like to be someone else?</p>
+    <p class="gap">I asked myself WHY a great many times;</p>
+    <p>why am I me,</p>
+    <p>why am I here and what does this life have to teach us.</p>
+    <p class="gap">In the end I do not really know and I do not care</p>
+    <p>because the only person who can tell me that</p>
+    <p class="caps">EVERYTHING IS POSSIBLE: is me.</p>
+    <p class="gap">When you do not have a path already laid out, or you do not want one,</p>
+    <p>life is a rollercoaster that we build and then simulate ourselves.</p>
+    <p>We must test ourselves, seek answers, push our limits.</p>
+    <p class="gap">Believe in destiny and your actions will take you there,</p>
+    <p>like the day you will go to paradise. If you believe in it.</p>
+    <p>Your conscience assimilates it. That is what spirituality is.</p>
+    <p class="alone">Thank you mum.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(2)">← Previous</button>
+    <span class="foot-num" id="n3"></span>
+    <button class="foot-btn" onclick="go(4)">Next →</button>
+  </div>
+</div>
+
+<div class="folio" data-p="4">
+  <div class="poem">
+    <p class="gap">But wait, I am telling you all of this out of order...</p>
+    <p>Every person has the capacity to build the edifice of their own conscience,</p>
+    <p>to choose who they want to be.</p>
+    <p>But for that you must already know who you want to be,</p>
+    <p>and above all who you are.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(3)">← Previous</button>
+    <span class="foot-num" id="n4"></span>
+    <button class="foot-btn" onclick="go(5)">Next →</button>
+  </div>
+</div>
+
+<div class="folio" data-p="5">
+  <div class="poem">
+    <p>It takes asking yourself an enormous amount of questions,</p>
+    <p>fill your head up, thinking too much is good as long as we do it for ourselves.</p>
+    <p class="gap">We rarely find answers there but we find a direction</p>
+    <p>and that is what creates our path toward the authenticity of a life.</p>
+    <p>An immersive experience in the leading role of your own film.</p>
+    <p class="gap">To be what we love, in order to love what we are.</p>
+    <p class="gap">Press on our strong points to anchor them deeper within us</p>
+    <p>and pull on the weaker ones to elevate them.</p>
+    <p class="gap">The body holds an energy and a rhythm</p>
+    <p>that are served by your ability to accept a situation, to live.</p>
+    <p>The barriers of our conscience, our emotional state</p>
+    <p>and our capacities are limited by us and us alone.</p>
+    <p class="gap">Because we are the architects of our lives,</p>
+    <p>from the foundations to the finishing touches.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(4)">← Previous</button>
+    <span class="foot-num" id="n5"></span>
+    <button class="foot-btn" onclick="go(6)">Next →</button>
+  </div>
+</div>
+
+<!-- 5. POEM 5 -->
+<div class="folio" data-p="6">
+  <div class="poem">
+    <p>Certainly the starting point is different for everyone,</p>
+    <p>but if you start first you must hold your place and deserve it.</p>
+    <p>While if you start twentieth you must give twenty times more effort</p>
+    <p>than the first and that is an important thing to know.</p>
+    <p>Everyone has their role to play, in the way they choose.</p>
+    <p class="gap">In any case, now I know what I want in my life.</p>
+    <p>I never managed, in my adolescence, to project myself into my future</p>
+    <p>because I was not sure of myself.</p>
+    <p class="gap">And asking yourself the right questions</p>
+    <p>is eliminating and illuminating the fog inside your head.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(5)">← Previous</button>
+    <span class="foot-num" id="n6"></span>
+    <button class="foot-btn" onclick="go(7)">Next →</button>
+  </div>
+</div>
+
+<!-- 6. POEM 6 -->
+<div class="folio" data-p="7">
+  <div class="poem">
+    <p>I have been able to meet friends who inspired me,</p>
+    <p>I would love in turn to be able to inspire them.</p>
+    <p class="gap">Like every person I also make mistakes,</p>
+    <p>which I overcome through the will to change, repair, evolve and succeed.</p>
+    <p>To repair you must change and to succeed you must also evolve.</p>
+    <p>Hold your foundation and strengthen what is vulnerable.</p>
+    <p class="gap">I grew up with my brothers who taught me to be sociable,</p>
+    <p>spontaneous, natural and competitive.</p>
+    <p>A little sister in whom I have always placed my love and my care.</p>
+    <p class="gap">Because of that, being the person I am,</p>
+    <p>I will overcome anything with a smile.</p>
+    <p class="gap">Then I had a second little sister</p>
+    <p>who put my whole life back into context.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(6)">← Previous</button>
+    <span class="foot-num" id="n7"></span>
+    <button class="foot-btn" onclick="go(8)">Next →</button>
+  </div>
+</div>
+
+<!-- 7. POEM 7 -->
+<div class="folio" data-p="8">
+  <div class="poem">
+    <p>Birth is extraordinary because it transmitted to me far more than everything I have told.</p>
+    <p class="gap">And with one single first look: I saw myself again, in her place.</p>
+    <p>Then I looked at my own path,</p>
+    <p>it is not the most beautiful, it is not the most perfect but it is mine.</p>
+    <p class="gap">I am only at the beginning of the preface</p>
+    <p>and I am the only one who can develop what comes next.</p>
+    <p class="gap">A life is the story of your thoughts, so write it.</p>
+    <p>Shape your ideas.</p>
+    <p class="gap">Even if we do not always have the choice and cannot always do what we want,</p>
+    <p>we can fight for who we are and what we love.</p>
+    <p class="gap">For those who love us and those we love.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(7)">← Previous</button>
+    <span class="foot-num" id="n8"></span>
+    <button class="foot-btn" onclick="go(9)">Next →</button>
+  </div>
+</div>
+
+<!-- 8. POEM 8 -->
+<div class="folio" data-p="9">
+  <div class="poem">
+    <p>To say I loved living, I also loved destroying myself</p>
+    <p>and I rejected my feelings because we always attach ourselves to contradictions</p>
+    <p>but when I put what is essential back into context,</p>
+    <p>the foundations of life's meaning, the idea of creation,</p>
+    <p>the journey of our first days up to the edifice of our conscience.</p>
+    <p class="gap">I understood why I was here: to create and to seek myself without end.</p>
+    <p class="gap">So I needed a foundation, and there is one thing my mother gave me</p>
+    <p>that I remembered and that no one will ever be able to take from me,</p>
+    <p>my greatest weapon: my smile and my positivity</p>
+    <p>that I put in service of my beliefs and my vision.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(8)">← Previous</button>
+    <span class="foot-num" id="n9"></span>
+    <button class="foot-btn" onclick="go(10)">Next →</button>
+  </div>
+</div>
+
+<!-- 9. POEM 9 -->
+<div class="folio" data-p="10">
+  <div class="poem">
+    <p>When I looked at my little sister, I examined that smile which told me</p>
+    <p>« be happy, that is all there is to it. »</p>
+    <p class="gap">Louna, you too were born happy.</p>
+    <p>Thanks to mum.</p>
+    <p class="signature">A thought.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(9)">← Previous</button>
+    <span class="foot-num" id="n10"></span>
+    <button class="foot-btn" disabled></button>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 11;
+  let cur = 0;
+
+  function go(n) {
+    document.querySelectorAll('.folio').forEach(f => f.classList.remove('active'));
+    document.querySelector(`[data-p="${n}"]`).classList.add('active');
+    cur = n;
+    setNums();
+    window.scrollTo(0, 0);
+  }
+
+  function setNums() {
+    for (let i = 1; i < TOTAL; i++) {
+      const el = document.getElementById('n' + i);
+      if (el) el.textContent = i + ' / ' + (TOTAL - 1);
+    }
+  }
+setNums();
+</script>
+</body>
+</html>

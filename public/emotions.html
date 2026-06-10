@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Émotions — Noah Scheidler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #f7f4ee;
+    --ink: #1c1a17;
+    --muted: #a09a92;
+    --max: 448px;
+  }
+
+  html, body {
+    min-height: 100%;
+    background: #f8f7f5;
+    padding: 3rem 1rem;
+    color: var(--ink);
+    font-family: 'EB Garamond', Georgia, serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .folio {
+    display: none;
+    min-height: calc(var(--max, 448px) * 1.5);
+    min-height: unset;
+        max-width: var(--max);
+    margin: 0 auto;
+    padding: 58px 36px 50px;
+    flex-direction: column;
+    animation: appear 0.4s ease;
+    background: var(--bg);
+    box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+
+  }
+
+  .folio.active { display: flex; }
+
+  @keyframes appear {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+
+  .folio-cover {
+    aspect-ratio: 2 / 3;
+    min-height: unset !important;
+    height: auto;
+    background: #ffffff;
+    box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+    min-height: 100vh;
+  }
+
+  .cover-author-name {
+    font-size: 1.9rem;
+    font-weight: 400;
+    letter-spacing: 0.01em;
+    color: #1c1a17;
+    margin: 0 0 2px 0;
+    line-height: 1.1;
+  }
+
+  .cover-mention {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: #9a9288;
+    margin: 0 0 18px 0;
+    letter-spacing: 0.04em;
+  }
+
+  .cover-h1 {
+    font-size: 2.4rem;
+    font-weight: 400;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: var(--ink);
+    margin: 28px 0 12px;
+  }
+
+  .cover-epi {
+    font-style: italic;
+    font-size: 0.88rem;
+    line-height: 1.9;
+    color: var(--muted);
+  }
+
+  .cover-foot {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-top: 1px solid #e4dfd7;
+  }
+
+  .cover-pub {
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .poem {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .poem-title {
+    font-size: 0.62rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4rem;
+  }
+
+  .poem p {
+    font-size: 0.9rem;
+    line-height: 1.95;
+    color: var(--ink);
+    margin-bottom: 0.2em;
+    text-align: left;
+  }
+
+  .poem p.para {
+    margin-bottom: 1em;
+  }
+
+  .poem p.para:last-of-type {
+    margin-bottom: 0;
+  }
+
+  .poem p.signature {
+    margin-top: 2.5em;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 36px;
+    margin-top: auto;
+  }
+
+  .foot-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+
+  .foot-btn:hover { color: var(--ink); }
+  .foot-btn:disabled { opacity: 0; pointer-events: none; }
+
+  .foot-num {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+  }
+
+  @media (max-width: 600px) {
+    html { font-size: 85%; }
+    .folio { padding: 72px 28px 64px; }
+    .cover-h1 { font-size: 2.24rem; }
+    .poem p { font-size: 0.97rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- 0. COUVERTURE -->
+<div class="folio folio-cover active" data-p="0">
+  <div>
+    <p class="cover-author-name">Noah Scheidler</p>
+    <p class="cover-mention">Peur. Tristesse. Rêve. Amour.</p>
+    <h1 class="cover-h1">Émotions</h1>
+  </div>
+  <p class="cover-epi" style="margin-top:auto;padding-bottom:28px">Ce que nous redoutons le plus,<br>ce sont les causes qui nous échappent.</p>
+  <div class="cover-foot">
+    <span class="cover-pub">Autopublié par l'auteur</span>
+    <button class="foot-btn" onclick="go(1)">Lire →</button>
+  </div>
+</div>
+
+<!-- 1. HANTE MOI -->
+<div class="folio" data-p="1">
+  <div class="poem">
+    <p class="poem-title">Hante moi</p>
+    <br>
+    <p class="para">Une création montée de toute pièce. Au travers de notre tête. Dans l'ombre de nos émotions se cache toujours, quelque part, la peur. Elle rôde dans un recoin. Parfois elle nous fixe droit dans les yeux jusqu'à nous figer devant notre propre âme. Elle est l'éclipse d'une figure cauchemardesque : elle nous tétanise, elle secoue le temps et nous reflète l'image de notre propre miroir intérieur où l'on tremble en se regardant.</p>
+    <p class="para">À travers une scène d'horreur, ou un mauvais souvenir surgissant de notre esprit, elle nous envahit d'une étrange mélancolie. Elle s'immisce dans la matière d'une question, dans l'instant d'une quête de réponse. Elle éveille notre instinct de survie, pour nous empêcher de sombrer dans ses abîmes. Elle exige qu'on la reconnaisse, car c'est ainsi qu'elle nous rend vivant. Par elle, nous apprenons à façonner notre force, avec patience.</p>
+    <p class="para">La peur est inévitable mais jamais irréversible. Elle prend forme pour une raison unique : il demeure, dans nos cœurs, une once d'amour. Elle se nourrit de notre lumière, pour nous en faire prendre conscience ou pour nous pousser à protéger davantage ce à quoi nous tenons le plus.</p>
+    <p class="para">Et lorsqu'on croise le regard de cette figure troublante qui nous laisse sans mots, on comprend qu'elle menace notre liberté d'être et notre liberté d'aimer. Elle jette sur nous un voile nostalgique : il suffit de l'écarter, et déjà le vent recommence à danser. Et si l'on apprend à le porter avec soi, il guide nos pas plutôt que de nous retenir dans le passé.</p>
+    <p class="para">Nous ne craignons la souffrance qu'à travers l'attachement. Et ce que nous redoutons le plus, ce sont les causes qui nous échappent : ces présences sans origine, ces blessures sans réponse. Mais la peur n'est pas une anomalie, elle est naturelle. Dans chaque question qu'elle impose, se dépose la promesse d'une réponse sans pareil.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(0)">← Retour</button>
+    <span class="foot-num" id="n1"></span>
+    <button class="foot-btn" onclick="go(2)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 2. LE VOYAGE D'UNE LARME -->
+<div class="folio" data-p="2">
+  <div class="poem">
+    <p class="poem-title">Le Voyage d'une Larme</p>
+    <br>
+    <p class="para">Pour l'instant d'une vérité. Des musiciens jouent la catastrophe d'un esprit tourmenté. Un cyclone s'abat sur la plus calme des marées.</p>
+    <p class="para">Là où les yeux incarnent l'océan, une tempête s'apprête à briser le vent.</p>
+    <p class="para">Il n'y a plus de reflet sur l'eau, les nuages ont chagriné la lune. La lumière se retire et laisse place aux anges déchus, libres de danser, perdus dans la brume.</p>
+    <p class="para">Le rythme des vagues continue de chanter, elles oublient la mélodie. Un instrument s'élève au cœur de l'orchestre, transformant chacun de leurs mouvements en symphonie.</p>
+    <p class="para">Les notes houlent, compagnons des voix du ciel. Elles se laissent emporter par l'harmonie d'un effondrement céleste, pour raconter sur la rive les ébats d'une nuit sensorielle et rebelle.</p>
+    <p class="para">À l'orée des flots, les artistes saluent leur public d'un regard leste. Les cieux pleurent, funestes et modestes, la beauté de ce désastre organisé.</p>
+    <p class="para">Et dans ce chaos subtil, théâtrale est la lumière de l'être, jouant sa propre tourmente et silhouette.</p>
+    <p class="para">Un esprit qui pleure est un ouragan qui traverse l'âme, et déborde sur le large. La mer n'est qu'un miroir, et la tempête, un souvenir, car le cœur n'a jamais existé ailleurs que dans un océan intensément ivre.</p>
+    <p class="para">Puis, vient le silence, celui qui suit la tempête.</p>
+    <p class="para">Les repères s'effacent pour des heures ou des jours, dans un brouillard sans contours. C'est la blessure qui remonte lentement à la surface, lourde dans tout le corps. Le temps se fige, la mémoire s'agite. La tristesse ressemble à la fin, une noyade répétée, une mort vécue dans l'incapacité d'être.</p>
+    <p class="para">Pourtant, de ces accords, l'atmosphère bouge encore. Les nuages doucement s'évaporent, dans l'inoubliable moment d'un voyage éphémère.</p>
+    <p class="para">Chaque larme est une goutte de pluie, un souvenir qui caresse la peau, ou une douleur qui s'envole dans l'air.</p>
+    <p class="para">À travers ce déluge, l'âme apprend à nager vers sa propre lumière, pour renaître de la sublime obscurité des notes qui l'ont fait pleurer.</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(1)">← Précédent</button>
+    <span class="foot-num" id="n2"></span>
+    <button class="foot-btn" onclick="go(3)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 3. MIROIR DE L'ÂME -->
+<div class="folio" data-p="3">
+  <div class="poem">
+    <p class="poem-title">Miroir de l'Âme</p>
+    <br>
+    <p>Les yeux se ferment, la nuit retourne le monde</p>
+    <p>Un spectateur, vous-même !</p>
+    <p>L'inconscient devient l'architecte</p>
+    <p>Chute au fond de l'être</p>
+    <p>Dans une métamorphose éphémère</p>
+    <p>Le rêve s'envole sans permission vers une autre dimension</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(2)">← Précédent</button>
+    <span class="foot-num" id="n3"></span>
+    <button class="foot-btn" onclick="go(4)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 4. CUPIDON -->
+<div class="folio" data-p="4">
+  <div class="poem">
+    <p class="poem-title">Cupidon</p>
+    <br>
+    <p>L'archer de l'amour est parfois d'humeur généreuse</p>
+    <p>Ses flèches sont pour autant bien trop aiguisées</p>
+    <p>Tranchant l'odeur et le toucher</p>
+    <p>Son arme ne connaît la guerre</p>
+    <p>Qu'à des fins heureuses</p>
+    <p>Lui arrive-t-il même de faire usage du poison</p>
+    <p>Pour davantage de passion</p>
+    <p>Le sang coule par amour</p>
+    <p>L'empreinte reste pour toujours</p>
+    <p class="signature">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(3)">← Précédent</button>
+    <span class="foot-num" id="n4"></span>
+    <button class="foot-btn" disabled></button>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 5;
+  let cur = 0;
+
+  function go(n) {
+    document.querySelectorAll('.folio').forEach(f => f.classList.remove('active'));
+    document.querySelector(`[data-p="${n}"]`).classList.add('active');
+    cur = n;
+    setNums();
+    window.scrollTo(0, 0);
+  }
+
+  function setNums() {
+    for (let i = 1; i < TOTAL; i++) {
+      const el = document.getElementById('n' + i);
+      if (el) el.textContent = i + ' / ' + (TOTAL - 1);
+    }
+  }
+setNums();
+</script>
+</body>
+</html>

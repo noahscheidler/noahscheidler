@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Note à Moi Même — Noah Scheidler</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root { --bg: #f7f4ee; --ink: #1c1a17; --muted: #a09a92; --max: 448px; }
+  html, body { min-height: 100%; background: #f8f7f5; padding: 3rem 1rem;
+    color: var(--ink); font-family: 'EB Garamond', Georgia, serif; -webkit-font-smoothing: antialiased; }
+  .folio { display: none; min-height: calc(var(--max, 448px) * 1.5);
+    min-height: unset; max-width: var(--max); margin: 0 auto; padding: 58px 36px 50px; flex-direction: column; animation: appear 0.4s ease; background: var(--bg); box-shadow: 0 2px 32px rgba(0,0,0,0.08), 0 0 0 1px rgba(0,0,0,0.04);
+ }
+  .folio.active { display: flex; }
+  @keyframes appear { from { opacity: 0; } to { opacity: 1; } }
+  .folio-cover {
+    aspect-ratio: 2 / 3;
+    min-height: unset !important;
+    height: auto; background: #ffffff; min-height: 100vh; }
+  .cover-author-name { font-family: 'EB Garamond', Georgia, serif; font-size: 1.9rem; font-weight: 400; letter-spacing: 0.01em; color: #1c1a17; margin: 0 0 2px 0; line-height: 1.1; }
+  .cover-mention { font-family: 'EB Garamond', Georgia, serif; font-size: 0.78rem; font-style: italic; color: #9a9288; margin: 0 0 18px 0; letter-spacing: 0.04em; }
+  .cover-h1 { font-size: 2.4rem; font-weight: 400; line-height: 1.15; letter-spacing: 0.01em; color: var(--ink); margin: 28px 0 12px; }
+  .cover-epi { font-style: italic; font-size: 0.88rem; line-height: 1.9; color: var(--muted); padding-bottom: 28px; }
+  .cover-foot { padding-top: 20px; display: flex; justify-content: space-between; align-items: flex-end; border-top: 1px solid #e4dfd7; }
+  .cover-pub { font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--muted); }
+  .poem { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+  .poem p { font-size: 0.9rem; line-height: 1.95; color: var(--ink); margin-bottom: 1em; text-align: left; }
+  .poem p:last-child { margin-bottom: 0; }
+  .sig { margin-top: 2.5em; font-style: italic; font-size: 0.85rem; color: var(--muted); }
+  .foot { display: flex; align-items: center; justify-content: space-between; padding-top: 36px; margin-top: auto; }
+  .foot-btn { background: none; border: none; cursor: pointer; font-family: 'EB Garamond', Georgia, serif; font-size: 0.75rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); padding: 4px 0; transition: color 0.2s; }
+  .foot-btn:hover { color: var(--ink); }
+  .foot-btn:disabled { opacity: 0; pointer-events: none; }
+  .foot-num { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); }
+  @media (max-width: 600px) {
+    html { font-size: 85%; } .folio { padding: 72px 28px 64px; } .cover-h1 { font-size: 2.24rem; } .poem p { font-size: 0.97rem; } }
+</style>
+</head>
+<body>
+
+<!-- 0. COUVERTURE -->
+<div class="folio folio-cover active" data-p="0">
+  <div>
+    <p class="cover-author-name">Noah Scheidler</p>
+    <p class="cover-mention">Recueil de poèmes, Vol. 3</p>
+    <h1 class="cover-h1">Note à Moi Même</h1>
+  </div>
+  <p class="cover-epi" style="margin-top:auto;padding-bottom:28px">Ainsi j'aime autant mon bonheur que mon malheur,<br>étant donné que l'un offre l'autre.</p>
+  <div class="cover-foot">
+    <span class="cover-pub">Autopublié par l'auteur</span>
+    <button class="foot-btn" onclick="go(1)">Lire →</button>
+  </div>
+</div>
+
+<!-- 1. POÈME 1 — PARTIE A -->
+<div class="folio" data-p="1">
+  <div class="poem">
+    <p>Ce qu'on est sûr de savoir nous fait en réalité bien plus peur que ce qu'on n'est pas en mesure de connaître. Et c'est pour cela qu'il est plus évident de se diriger vers l'inconnu. La raison nous l'indique et le coeur ne suit pas.</p>
+    <p>Alors la tristesse entre en scène et nous pose un dilemme.</p>
+    <p>Et de quelle manière ? Soit triste ou soit heureux, mais aime.</p>
+    <p>Aime d'une façon où tu ne pourras te lasser, d'une tristesse qui n'en sera jamais assez.</p>
+    <p>Celle qui se met au service de notre productivité, à commettre le bon du mauvais. Dans la ferme et tendre sélection de nos sentiments bornés.</p>
+    <p>Alors pour me soigner je m'enfuis dans la peinture et je me libère par l'écriture. Je recrée mon histoire à travers ces uniques outils, endossés à consoler mon aventure.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(0)">← Retour</button>
+    <span class="foot-num" id="n1"></span>
+    <button class="foot-btn" onclick="go(2)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 2. POÈME 1 — PARTIE B -->
+<div class="folio" data-p="2">
+  <div class="poem">
+    <p>Elle qui répète comme les premières heures qui l'ont fondées, face à face sans les voir passer ; un ressenti d'intemporalité.</p>
+    <p>Où le temps s'est arrêté, à l'évidence d'une fin capturée de mes yeux pour l'éternité. Je parle bien d'une émotion aimée, la seule pour laquelle mon malheur s'accorde une part d'efficacité. On n'utilise pas de raccourcis pour évoquer la science de l'être, j'explique mon calcul par la formule des mots.</p>
+    <p>Une interaction problématisée dans laquelle j'offre ma réponse dès mon énoncé : Il n'y a pas de place à la tristesse si elle n'est pas accompagnée.</p>
+    <p>J'y connais son importance par l'omniprésence de son harcèlement dans mes pensées. J'écris cette fois sur la tristesse, ce sujet réversible d'une personne à l'autre, un thème intime qui convient aux émotions les plus profondes. Ce qui représente la gêne et l'embarras, la volonté ou le refus, et après tout, un fantasme, la tristesse est belle.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(1)">← Précédent</button>
+    <span class="foot-num" id="n2"></span>
+    <button class="foot-btn" onclick="go(3)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 3. POÈME 2 -->
+<div class="folio" data-p="3">
+  <div class="poem">
+    <p>J'aime ce qui est beau mais j'ai eu peur de ce rêve.</p>
+    <p>Hélas mes yeux, plus que tout, sommeillent pour y retourner par ce qu'elle est mon évènement, mon cycle et mon moment et je représente son sentiment, son verdict et sa sentence. Alors d'un côté elle m'attire simplement pour développer et évoluer.</p>
+    <p>Non pas pour convaincre ou conquérir, c'est le rôle du temps et il réalise une chose parfaitement, il répond à nos questions et nos problèmes.</p>
+    <p>Et il n'y a nul aspect négatif à l'évocation de mon schéma. Il n'y a non plus la présence d'une prière. Aucun effet de plaire, ni de jouer.</p>
+    <p>Puis encore moins l'espérance d'un retour en arrière.</p>
+    <p>J'ai donc l'obligation de m'en remettre à tout ce qu'elle m'offre après m'avoir consumé. La patience, la retenue, la volonté, la passion et l'engagement ; entre autres et vulgairement l'amour consommé.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(2)">← Précédent</button>
+    <span class="foot-num" id="n3"></span>
+    <button class="foot-btn" onclick="go(4)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 4. POÈME 3 -->
+<div class="folio" data-p="4">
+  <div class="poem">
+    <p>C'est un sentiment sans fin, sur lequel j'écrirai jusqu'au bout et sans relâche. Une diplomatie des émotions, que je résous à concilier, par ma manière de m'exprimer. User de mes émotions pour créer, et faire apparaître leurs bienfaits.</p>
+    <p>Je donne tout à mon chagrin sans rien lui demander en retour, car c'est la seule chose qui me permet de le vaincre. Je ne ressens pas le besoin d'une certitude de bonheur, comme évoqué, je ne peux contrôler les événements. Uniquement mes émotions, et en tant qu'individu, elles me guident.</p>
+    <p>Le simple fait d'avoir des idées, voilà mon attachement, voilà ma direction.</p>
+    <p>C'est à ma tristesse que je m'adresse, au travers de ce médiocre texte.</p>
+    <p>J'ai usé d'elle pour montrer à mes sentiments, mes meilleurs cotés.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(3)">← Précédent</button>
+    <span class="foot-num" id="n4"></span>
+    <button class="foot-btn" onclick="go(5)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 5. POÈME 4 -->
+<div class="folio" data-p="5">
+  <div class="poem">
+    <p>Je sais que ma vie est régie par sa représentation.</p>
+    <p>Je fais en sorte qu'elle me refuse, pour pouvoir la prendre dans mes bras, l'abdiquer et qu'elle voit à quel point elle ne me mérite pas.</p>
+    <p>Dans ma rédemption où je suis mon coupable, car je suis mon protagoniste.</p>
+    <p>Je ne peux qu'avant tout me rattacher à mon bonheur incontestable et authentique pour répondre aux questions de ma vie absurde et illogique.</p>
+    <p>Au traitement de chaque sensation, j'en tire leur avantage.</p>
+    <p>Par l'analyse de mes ressentis, l'optimisme est la prééminence de mon être.</p>
+    <p>Voilà la réponse, j'inverse le sens de mon émotion la plus douloureuse dans le but d'en faire une prérogative.</p>
+    <p>Ici, peu importe mes états, j'érige les bienfaits de chacun de mes éclats ; à trouver leur prédisposition dans l'assemblage de mes émotions.</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(4)">← Précédent</button>
+    <span class="foot-num" id="n5"></span>
+    <button class="foot-btn" onclick="go(6)">Suivant →</button>
+  </div>
+</div>
+
+<!-- 6. POÈME 5 — FINAL -->
+<div class="folio" data-p="6">
+  <div class="poem">
+    <p>Lorsque j'aime c'est irréversible, c'est mon arme pour battre ma mélancolie.</p>
+    <p>Si j'ai beaucoup pris, je donnerai toujours plus, d'une manière indéfinie pour l'amour de toute une vie.</p>
+    <p>C'est une émotion qui me refusera toujours car je l'accepte dans son entièreté, à faire partie de moi. Elle m'aide à réfléchir, donc me permet d'influencer une chose que je ne peux contrôler : mes événements.</p>
+    <p>Alors je vis pour elle, car petit, elle était déjà mon ennemie, mais je m'embrase désormais à la prendre dans mon coeur au même titre que le bonheur ; pour ce qu'elle m'inspire. Un écrit paradoxal qui leur donne les mêmes conséquences : une retombée.</p>
+    <p>Ainsi j'aime autant mon bonheur que mon malheur étant donné que l'un offre l'autre.</p>
+    <p>Je suis heureux quoi qu'il arrive, pour inverser la tristesse et transgresser le bien-être.</p>
+    <p style="margin-top:2.5em;font-style:italic;font-size:0.85rem;color:var(--muted);">Noah Scheidler</p>
+  </div>
+  <div class="foot">
+    <button class="foot-btn" onclick="go(5)">← Précédent</button>
+    <span class="foot-num" id="n6"></span>
+    <button class="foot-btn" disabled></button>
+  </div>
+</div>
+
+<script>
+  const TOTAL = 7;
+  let cur = 0;
+  function go(n) {
+    document.querySelectorAll('.folio').forEach(f => f.classList.remove('active'));
+    document.querySelector(`[data-p="${n}"]`).classList.add('active');
+    cur = n; setNums(); window.scrollTo(0, 0);
+  }
+  function setNums() {
+    for (let i = 1; i < TOTAL; i++) {
+      const el = document.getElementById('n' + i);
+      if (el) el.textContent = i + ' / ' + (TOTAL - 1);
+    }
+  }
+setNums();
+</script>
+</body>
+</html>
