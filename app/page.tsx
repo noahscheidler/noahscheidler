@@ -311,7 +311,7 @@ export default function Home() {
 
         <motion.div {...FADE_UP_DELAYED}>
           <Link href="/polaroids" style={{ display: "block" }}>
-            <InfiniteMarquee speed={24} height="clamp(150px, 43vw, 280px)">
+            <InfiniteMarquee speed={24} mobileSpeed={16} height="clamp(150px, 43vw, 280px)">
               {POLAROID_PREVIEW.map(file => (
                 <div key={file} style={{ height: "clamp(150px, 43vw, 280px)", flexShrink: 0, boxShadow: "0 4px 24px rgba(0,0,0,0.13), 0 1px 6px rgba(0,0,0,0.08)" }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -365,7 +365,7 @@ export default function Home() {
 
         <motion.div {...FADE_UP_DELAYED}>
           <Link href="/paintings" style={{ display: "block" }}>
-            <InfiniteMarquee speed={20} height="clamp(160px, 48vw, 340px)">
+            <InfiniteMarquee speed={20} mobileSpeed={13} height="clamp(160px, 48vw, 340px)">
               {PAINTING_FILES.map(file => (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img

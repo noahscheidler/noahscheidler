@@ -60,11 +60,16 @@ a {
 /* ── Infinite marquee ───────────────────────────────── */
 @keyframes marquee-left {
   from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  to   { transform: translateX(-33.333%); }
 }
 .marquee-track {
   animation: marquee-left var(--marquee-speed, 40s) linear infinite;
   will-change: transform;
+}
+@media (max-width: 600px) {
+  .marquee-track {
+    animation-duration: var(--marquee-speed-mobile, var(--marquee-speed, 40s));
+  }
 }
 
 /* ── Fade-up animation ── */

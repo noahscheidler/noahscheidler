@@ -3,13 +3,16 @@
 export default function InfiniteMarquee({
   children,
   speed = 40,
+  mobileSpeed,
   height,
 }: {
   children: React.ReactNode[];
   speed?: number;
+  mobileSpeed?: number;
   height?: string;
 }) {
-  const doubled = [...children, ...children];
+  // Triple les items pour garantir que toutes les œuvres défilent sur mobile et desktop
+  const tripled = [...children, ...children, ...children];
 
   return (
     <div style={{ overflow: "hidden", width: "100%" }}>
@@ -22,9 +25,10 @@ export default function InfiniteMarquee({
           width: "fit-content",
           height,
           ["--marquee-speed" as string]: `${speed}s`,
+          ["--marquee-speed-mobile" as string]: `${mobileSpeed ?? speed * 0.7}s`,
         }}
       >
-        {doubled.map((child, i) => (
+        {tripled.map((child, i) => (
           <div key={i} style={{ flexShrink: 0 }}>
             {child}
           </div>
