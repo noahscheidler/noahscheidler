@@ -42,16 +42,16 @@ const DRAWINGS = [
 ];
 
 const PAINTINGS = [
-  { title: "LA DANSE",                              file: "la-dance.jpg",      ratio: "1097/1434" },
-  { title: "TOI ET MOI",                            file: "toi-et-moi.jpg",    ratio: "1446/1088" },
-  { title: "DOUX REGARD",                           file: "doux-regard.jpg",   ratio: "1424/1104" },
-  { title: "PILOTE",                                file: "pilote.jpg",        ratio: "2272/1728" },
-  { title: "LA FEMME",                              file: "la-femme.jpg",      ratio: "1096/1435" },
-  { title: "PROLIXE",                               file: "prolixe.jpg",       ratio: "1097/1434" },
-  { title: "LE BUCHER",                             file: "le-bucher.jpg",     ratio: "2354/2089" },
-  { title: "SELF PORTRAIT WHEN I WAS 19 AND BOLD", file: "self-portrait.jpg", ratio: "1461/1077" },
-  { title: "STOIQUE",                               file: "stoique.jpg",       ratio: "1402/1122" },
-  { title: "L'ARTISTE",                             file: "l-artiste.jpg",     ratio: "1/1" },
+  { title: "LA DANSE",                              file: "la-dance.jpg",      ratio: "1097/1434", year: "2026" },
+  { title: "TOI ET MOI",                            file: "toi-et-moi.jpg",    ratio: "1446/1088", year: "2023" },
+  { title: "DOUX REGARD",                           file: "doux-regard.jpg",   ratio: "1424/1104", year: "2023" },
+  { title: "PILOTE",                                file: "pilote.jpg",        ratio: "2272/1728", year: "2023" },
+  { title: "LA FEMME",                              file: "la-femme.jpg",      ratio: "1096/1435", year: "2025" },
+  { title: "PROLIXE",                               file: "prolixe.jpg",       ratio: "1097/1434", year: "2024" },
+  { title: "LE BUCHER",                             file: "le-bucher.jpg",     ratio: "2354/2089", year: "2023" },
+  { title: "SELF PORTRAIT WHEN I WAS 19 AND BOLD", file: "self-portrait.jpg", ratio: "1461/1077", year: "2023" },
+  { title: "STOIQUE",                               file: "stoique.jpg",       ratio: "1402/1122", year: "2023" },
+  { title: "L'ARTISTE",                             file: "l-artiste.jpg",     ratio: "1/1",       year: "2023" },
 ];
 
 const LS_KEY          = "ncs-drawings-order";
@@ -207,6 +207,16 @@ export default function PaintingsPage() {
               marginTop: "1rem",
             }}>
               {p.title}
+            </p>
+            <p style={{
+              fontFamily: "var(--font-space), sans-serif",
+              fontSize: "0.42rem",
+              letterSpacing: "0.16em",
+              color: "#c8c4bf",
+              textAlign: "center",
+              marginTop: "0.3rem",
+            }}>
+              {p.year}
             </p>
           </div>
         ))}
