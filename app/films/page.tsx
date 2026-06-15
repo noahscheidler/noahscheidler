@@ -61,7 +61,7 @@ export default function FilmsPage() {
               </p>
               <p style={{
                 fontFamily: "var(--font-space), sans-serif",
-                fontSize: "0.45rem",
+                fontSize: "0.675rem",
                 letterSpacing: "0.16em",
                 textTransform: "uppercase",
                 color: "#9e9a95",
