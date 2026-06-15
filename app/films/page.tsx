@@ -60,14 +60,14 @@ export default function FilmsPage() {
                 {film.title}
               </p>
               <p style={{
-                fontFamily: "var(--font-space), sans-serif",
-                fontSize: "0.45rem",
-                letterSpacing: "0.16em",
-                color: "#b0aca7",
-                textTransform: "uppercase",
+                fontFamily: "var(--font-cormorant), serif",
+                fontStyle: "italic",
+                fontWeight: 300,
+                fontSize: "clamp(0.9rem, 1.8vw, 1.15rem)",
+                color: "#9e9a95",
                 flexShrink: 0,
               }}>
-                {film.year} · {film.images.length} photos
+                {film.year}
               </p>
             </div>
           </article>
