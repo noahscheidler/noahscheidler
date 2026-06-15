@@ -60,10 +60,10 @@ export default function FilmsPage() {
                 {film.title}
               </p>
               <p style={{
-                fontFamily: "var(--font-cormorant), serif",
-                fontStyle: "italic",
-                fontWeight: 300,
-                fontSize: "clamp(0.9rem, 1.8vw, 1.15rem)",
+                fontFamily: "var(--font-space), sans-serif",
+                fontSize: "0.45rem",
+                letterSpacing: "0.16em",
+                textTransform: "uppercase",
                 color: "#9e9a95",
                 flexShrink: 0,
               }}>
