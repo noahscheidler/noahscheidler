@@ -83,15 +83,16 @@ export default function FilmPage({ params }: { params: { slug: string } }) {
           </h1>
         </div>
         <p style={{
-          fontFamily: "var(--font-space), sans-serif",
-          fontSize: "0.45rem",
-          letterSpacing: "0.16em",
-          color: "#b0aca7",
-          textTransform: "uppercase",
+          fontFamily: "var(--font-cormorant), serif",
+          fontStyle: "italic",
+          fontWeight: 300,
+          fontSize: "clamp(1rem, 2vw, 1.35rem)",
+          letterSpacing: "0.01em",
+          color: "#9e9a95",
           flexShrink: 0,
           paddingBottom: "0.2rem",
         }}>
-          {film.year} · {film.images.length} photos
+          {film.year}
         </p>
       </div>
 

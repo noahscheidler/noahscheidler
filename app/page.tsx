@@ -119,7 +119,7 @@ function WritingsCarousel() {
         });
         setVisible(true);
       }, 600);
-    }, 8000);
+    }, 10000);
     return () => clearInterval(interval);
   }, []);
 
