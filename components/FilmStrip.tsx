@@ -9,7 +9,7 @@ interface FilmStripProps {
   slug?:   string; // exception chez-emma / hante-moi
 }
 
-const SLIDE_MS = 3800;
+const SLIDE_MS = 5500;
 const FADE_S   = 0.5;
 
 const EXCEPTION_SLUG   = "chez-emma";
