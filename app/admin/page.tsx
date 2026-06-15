@@ -34,7 +34,7 @@ const DEFAULT_DRAWINGS = [
 
 export default function AdminPage() {
   /* ── auth ─────────────────────────────────────── */
-  const [auth,     setAuth]     = useState(false);
+  const [auth,     setAuth]     = useState(true);
   const [pwInput,  setPwInput]  = useState("");
   const [pwError,  setPwError]  = useState(false);
 

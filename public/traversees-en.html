@@ -29,7 +29,6 @@
   .folio {
     display: none;
     min-height: calc(var(--max, 448px) * 1.5);
-    min-height: unset;
         max-width: var(--max);
     margin: 0 auto;
     padding: 58px 36px 50px;
@@ -177,6 +176,11 @@
     .folio { padding: 72px 28px 64px; }
     .cover-h1 { font-size: 2.24rem; }
     .poem p { font-size: 0.97rem; }
+  }
+
+  /* ── Folio mobile : pages contenu = même hauteur que couverture ── */
+  @media (max-width: 447px) {
+    .folio:not(.folio-cover) { min-height: calc(100vw * 1.5) !important; }
   }
 </style>
 </head>

@@ -32,3 +32,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Fichiers temporaires
+*.swp
+*.swo
+
+# Dossiers originaux non compressés
+/public/films/LA MUSE/
+/public/films/LA VEUVE/
+
+# Photos originales non renommées
+public/films/pierre-bourne-backstage/9725-*.JPG

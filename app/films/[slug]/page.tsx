@@ -70,7 +70,7 @@ export default function FilmPage({ params }: { params: { slug: string } }) {
           >
             {t("back")}
           </Link>
-          <h1 style={{
+          <h1 className="film-detail-title" style={{
             fontFamily: "var(--font-cormorant), serif",
             fontStyle: "italic",
             fontWeight: 300,

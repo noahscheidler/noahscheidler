@@ -55,6 +55,11 @@
   .foot-num { font-size: 0.7rem; letter-spacing: 0.12em; color: var(--muted); }
   @media (max-width: 600px) {
     html { font-size: 85%; } .folio { padding: 72px 28px 64px; } .cover-h1 { font-size: 2.06rem; } .poem p { font-size: 0.97rem; } }
+
+  /* ── Folio mobile : pages contenu = même hauteur que couverture ── */
+  @media (max-width: 447px) {
+    .folio:not(.folio-cover) { min-height: calc(100vw * 1.5) !important; }
+  }
 </style>
 </head>
 <body>

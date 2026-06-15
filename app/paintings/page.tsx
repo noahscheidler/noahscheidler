@@ -109,7 +109,7 @@ export default function PaintingsPage() {
   const onDragEnd = () => { dragIndex.current = null; };
 
   const toggle = (
-    <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
+    <div className="focus-toggle" style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
       <span style={{
         fontFamily: "var(--font-space), sans-serif",
         fontSize: "0.43rem",
@@ -173,6 +173,7 @@ export default function PaintingsPage() {
         {(paintings.length ? paintings : PAINTINGS).map((p) => (
           <div
             key={p.title}
+            className="painting-item"
             onMouseEnter={() => focusEnabled && setHovered(p.title)}
             onMouseLeave={() => focusEnabled && setHovered(null)}
             style={{

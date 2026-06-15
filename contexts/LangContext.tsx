@@ -1,6 +1,7 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { usePathname } from "next/navigation";
 
 type Lang = "EN" | "FR";
 
@@ -74,7 +75,13 @@ const LangContext = createContext<LangContextType>({
 });
 
 export function LangProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("FR");
+  const pathname = usePathname();
+  const defaultLang: Lang = pathname?.startsWith("/writings") ? "FR" : "EN";
+  const [lang, setLang] = useState<Lang>(defaultLang);
+
+  useEffect(() => {
+    setLang(pathname?.startsWith("/writings") ? "FR" : "EN");
+  }, [pathname]);
 
   const t = (key: string): string => dict[lang][key] ?? key;
 

@@ -71,6 +71,22 @@ const BASE_FILMS: Film[] = [
     images: Array.from({ length: 25 }, (_, i) => `los-angeles-through-my-lens-${String(i + 1).padStart(2, "0")}.jpg`),
   },
   {
+    slug: "la-muse",
+    title: "LA MUSE",
+    year: "2026",
+    description: "",
+    descriptionFr: "",
+    images: Array.from({ length: 6 }, (_, i) => `la-muse-${String(i + 1).padStart(2, "0")}.jpg`),
+  },
+  {
+    slug: "la-veuve",
+    title: "LA VEUVE",
+    year: "2026",
+    description: "",
+    descriptionFr: "",
+    images: Array.from({ length: 6 }, (_, i) => `la-veuve-${String(i + 1).padStart(2, "0")}.jpg`),
+  },
+  {
     slug: "mariage-mort",
     title: "MARIAGE MORT",
     year: "2023",
@@ -92,7 +108,7 @@ const BASE_FILMS: Film[] = [
     year: "2022",
     description: "",
     descriptionFr: "",
-    images: Array.from({ length: 20 }, (_, i) => `pierre-bourne-backstage-${String(i + 1).padStart(2, "0")}.jpg`),
+    images: Array.from({ length: 22 }, (_, i) => `pierre-bourne-backstage-${String(i + 1).padStart(2, "0")}.jpg`),
   },
   {
     slug: "saint-esprit",
@@ -116,7 +132,7 @@ const BASE_FILMS: Film[] = [
     year: "2024",
     description: "",
     descriptionFr: "",
-    images: Array.from({ length: 35 }, (_, i) => `untilted-${String(i + 1).padStart(2, "0")}.jpg`),
+    images: Array.from({ length: 36 }, (_, i) => `untilted-${String(i + 1).padStart(2, "0")}.jpg`),
   },
   {
     slug: "voyage-d-une-larme",

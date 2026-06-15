@@ -87,6 +87,22 @@ a {
   .film-title { font-size: 0.85rem !important; }
 }
 
+/* ── Titre page détail film : -50% sur mobile ── */
+@media (max-width: 600px) {
+  .film-detail-title { font-size: 0.73rem !important; }
+}
+
+/* ── Titre page détail film : -40% sur desktop ── */
+@media (min-width: 601px) {
+  .film-detail-title { font-size: clamp(0.88rem, 2.18vw, 1.69rem) !important; }
+}
+
+/* ── Focus peintures : désactivé sur mobile ── */
+@media (max-width: 600px) {
+  .painting-item { opacity: 1 !important; }
+  .focus-toggle { display: none !important; }
+}
+
 /* ── Titres de section : +10% sur mobile ── */
 @media (max-width: 600px) {
   .section-title-text { font-size: 1.61rem !important; }

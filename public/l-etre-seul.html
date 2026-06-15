@@ -52,6 +52,11 @@
   .foot-btn:disabled { opacity: 0; pointer-events: none; }
   @media (max-width: 600px) {
     html { font-size: 85%; } .folio { padding: 72px 28px 64px; } .cover-h1 { font-size: 2.24rem; } }
+
+  /* ── Folio mobile : pages contenu = même hauteur que couverture ── */
+  @media (max-width: 447px) {
+    .folio:not(.folio-cover) { min-height: calc(100vw * 1.5) !important; }
+  }
 </style>
 </head>
 <body>
