@@ -194,6 +194,7 @@ export default function PaintingsPage() {
                 src={`/paintings/${p.file}`}
                 alt={p.title}
                 fill
+                loading="eager"
                 style={{ objectFit: "contain", objectPosition: "center" }}
                 sizes="(max-width: 768px) 100vw, 720px"
               />
