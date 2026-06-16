@@ -6,6 +6,20 @@ const nextConfig = {
     deviceSizes: [375, 640, 828, 1080, 1280],
     imageSizes: [64, 128, 256, 384, 560],
   },
+  async headers() {
+    return [
+      {
+        // Pages HTML : jamais en cache
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "no-cache, no-store, must-revalidate",
+          },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;
