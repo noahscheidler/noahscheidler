@@ -182,21 +182,13 @@ export default function PaintingsPage() {
               transition: "opacity 0.3s ease",
             }}
           >
-            <div style={{
-              width: "100%",
-              maxWidth: "576px",
-              margin: "0 auto",
-              position: "relative",
-              aspectRatio: p.ratio,
-              overflow: "hidden",
-            }}>
-              <Image
+            <div style={{ width: "100%", maxWidth: "576px", margin: "0 auto" }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
                 src={`/paintings/${p.file}`}
                 alt={p.title}
-                fill
                 loading="eager"
-                style={{ objectFit: "contain", objectPosition: "center" }}
-                sizes="(max-width: 768px) 100vw, 720px"
+                style={{ width: "100%", height: "auto", display: "block" }}
               />
             </div>
             <p style={{
