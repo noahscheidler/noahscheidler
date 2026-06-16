@@ -443,6 +443,7 @@ export default function Home() {
         </div>
 
         <motion.div {...FADE_UP_DELAYED} style={{ maxWidth: "540px" }}>
+          <Link href="/biography" style={{ textDecoration: "none", color: "inherit", display: "block" }}>
           <p style={{
             fontFamily:    "var(--font-cormorant), serif",
             fontWeight:    300,
@@ -451,11 +452,13 @@ export default function Home() {
             color:         "#3a3a3a",
             letterSpacing: "0.01em",
             marginBottom:  "3rem",
+            cursor:        "pointer",
           }}>
             {lang === "FR"
               ? "Noah Charlemagne Scheidler est un artiste pluridisciplinaire français né en Bretagne, dans un village proche du Golfe du Morbihan. À seize ans, il s'installe à Paris, où il vit et crée encore aujourd'hui."
               : "Noah Charlemagne Scheidler is a French multidisciplinary artist born in Brittany, in a village near the Gulf of Morbihan. At sixteen, he moved to Paris, where he still lives and creates today."}
           </p>
+          </Link>
 
           <div style={{ display: "flex", flexDirection: "column", gap: "1.1rem" }}>
             {[

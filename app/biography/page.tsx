@@ -13,6 +13,7 @@ const BIO = {
       "Son travail explore l'amour, la mémoire, la spiritualité, le désir, la solitude et les transformations silencieuses qui façonnent une existence. Qu'il s'agisse d'une photographie, d'une chanson, d'une peinture ou d'un texte, il cherche avant tout à créer des œuvres sincères, capables de faire résonner une émotion, un souvenir ou une part intime de ceux qui les rencontrent.",
     ],
     info: [
+      { label: "Âge", text: "22 ans" },
       { label: "Basé à", text: "Paris" },
       { label: "Instagram", text: "@noahcharlemagne", href: "https://instagram.com/noahcharlemagne" },
       { label: "Contact", text: "noahcharlemagnescheidler@gmail.com", href: "mailto:noahcharlemagnescheidler@gmail.com" },
@@ -27,6 +28,7 @@ const BIO = {
       "His work explores love, memory, spirituality, desire, solitude and the silent transformations that shape a life. Whether through a photograph, a song, a painting or a text, he seeks above all to create sincere works capable of awakening an emotion, a memory or an intimate part of those who encounter them.",
     ],
     info: [
+      { label: "Age", text: "22 years old" },
       { label: "Based", text: "Paris" },
       { label: "Instagram", text: "@noahcharlemagne", href: "https://instagram.com/noahcharlemagne" },
       { label: "Contact", text: "noahcharlemagnescheidler@gmail.com", href: "mailto:noahcharlemagnescheidler@gmail.com" },
