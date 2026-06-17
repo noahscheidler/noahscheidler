@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Reorder } from "framer-motion";
 import { FILMS } from "@/data/films";
 
-type Mode         = "images" | "projets" | "dessins";
+type Mode         = "images" | "projets" | "dessins" | "polaroids";
 type SessionOrders = Record<string, string[]>;
 
 const TAB: React.CSSProperties = {
@@ -21,7 +21,19 @@ const TAB: React.CSSProperties = {
 
 const ADMIN_PASSWORD = "Lorenna33!Louna22!";
 
-const LS_DRAWINGS_KEY = "ncs-drawings-order";
+const LS_DRAWINGS_KEY  = "ncs-drawings-order";
+const LS_POLAROIDS_KEY = "polaroids-order";
+const DEFAULT_POLAROIDS = [
+  "IMG_3699.jpg","IMG_7863 2.JPG","IMG_7837.JPG","RL.jpg","Scan 6.JPG",
+  "IMG_2235.JPG","POLA B 7.JPG","polaroid-03.jpg","POLA B 6.jpg",
+  "IMG_20250216_0001.JPG","Scan 5.JPG","polaroid-06.jpg","Scan 8.JPG",
+  "IMG_2256.JPG","IMG_4377.JPG","IMG_9942.JPG","polaroid-04.jpg",
+  "polaroid-05.jpg","IMG_2266.JPG","IMG_7844.JPG","IMG_7848.JPG",
+  "NOAH 23.jpg","polaroid-01.jpg","NOAH 24.jpg","NOAH 25.JPG","NOAH 26.jpg",
+  "NOAH 31.jpg","NOAH 49.jpg","NOAH 51.jpg","NOAH 50.jpg","PAC 20.jpg",
+  "IMG_7845.JPG","Scan 10.JPG","Scan 12.JPG","Scan 14.JPG",
+  "IMG_8448.jpg","IMG_8452.JPG",
+];
 const DEFAULT_DRAWINGS = [
   "IMG_2737.jpg","IMG_2786.JPG","IMG_8253.jpg","IMG_8239.jpg","IMG_2792.jpg",
   "IMG_8234.jpg","IMG_2219.JPG","IMG_2795.jpg","IMG_8232.jpg","IMG_2784.jpg",
@@ -121,16 +133,31 @@ export default function AdminPage() {
   const [dessinsOrder, setDessinsOrder] = useState<string[]>(DEFAULT_DRAWINGS);
   const [dessinsModified, setDessinsModified] = useState(false);
 
+  /* ── polaroids mode state ─────────────────────── */
+  const [polaroidsOrder, setPolaroidsOrder] = useState<string[]>(DEFAULT_POLAROIDS);
+  const [polaroidsModified, setPolaroidsModified] = useState(false);
+
   useEffect(() => {
     try {
       const s = localStorage.getItem(LS_DRAWINGS_KEY);
       if (s) setDessinsOrder(JSON.parse(s));
+    } catch {}
+    try {
+      const p = localStorage.getItem(LS_POLAROIDS_KEY);
+      if (p) setPolaroidsOrder(JSON.parse(p));
     } catch {}
   }, []);
 
   const saveDessins = () => {
     localStorage.setItem(LS_DRAWINGS_KEY, JSON.stringify(dessinsOrder));
     setDessinsModified(false);
+    setStatus("saved");
+    setTimeout(() => setStatus("idle"), 2500);
+  };
+
+  const savePolaroids = () => {
+    localStorage.setItem(LS_POLAROIDS_KEY, JSON.stringify(polaroidsOrder));
+    setPolaroidsModified(false);
     setStatus("saved");
     setTimeout(() => setStatus("idle"), 2500);
   };
@@ -142,7 +169,7 @@ export default function AdminPage() {
   const film   = FILMS.find((f) => f.slug === selected)!;
   const images = session[selected] ?? film.images;
 
-  const hasChanges = Object.keys(session).length > 0 || projModified || dessinsModified;
+  const hasChanges = Object.keys(session).length > 0 || projModified || dessinsModified || polaroidsModified;
 
   /* ── remove one image from the current project ── */
   const removeImage = (img: string) => {
@@ -158,6 +185,12 @@ export default function AdminPage() {
     // Dessins order
     if (dessinsModified) {
       saveDessins();
+      return;
+    }
+
+    // Polaroids order
+    if (polaroidsModified) {
+      savePolaroids();
       return;
     }
 
@@ -229,7 +262,7 @@ export default function AdminPage() {
               {FILMS.length} projets · glisser pour réorganiser
             </p>
           </>
-        ) : (
+        ) : mode === "dessins" ? (
           <>
             <p style={{
               fontFamily: "var(--font-cormorant), serif",
@@ -243,6 +276,22 @@ export default function AdminPage() {
             </p>
             <p style={{ fontSize: "0.4rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#9e9a95" }}>
               {dessinsOrder.length} dessins · glisser pour réorganiser
+            </p>
+          </>
+        ) : (
+          <>
+            <p style={{
+              fontFamily: "var(--font-cormorant), serif",
+              fontStyle: "italic",
+              fontWeight: 300,
+              fontSize: "1.3rem",
+              lineHeight: 1,
+              marginBottom: "0.35rem",
+            }}>
+              Ordre des polaroids
+            </p>
+            <p style={{ fontSize: "0.4rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "#9e9a95" }}>
+              {polaroidsOrder.length} polaroids · glisser pour réorganiser
             </p>
           </>
         )}
@@ -311,6 +360,12 @@ export default function AdminPage() {
           >
             Dessins
           </button>
+          <button
+            onClick={() => setMode("polaroids")}
+            style={{ ...TAB, background: mode === "polaroids" ? "#1a1a1a" : "transparent", color: mode === "polaroids" ? "#f8f7f5" : "#9e9a95", borderLeft: "1px solid #e8e5e1" }}
+          >
+            Polaroids
+          </button>
         </div>
 
         {/* Project list — only shown in images mode */}
@@ -374,6 +429,17 @@ export default function AdminPage() {
           <div style={{ padding: "1rem", color: "#b0aca7", fontSize: "0.42rem", letterSpacing: "0.12em", lineHeight: 1.7 }}>
             Glisse les dessins pour changer leur ordre dans la galerie.
             {dessinsModified && (
+              <p style={{ marginTop: "0.8rem", color: "#1a1a1a" }}>
+                ● Modifications non sauvegardées
+              </p>
+            )}
+          </div>
+        )}
+
+        {mode === "polaroids" && (
+          <div style={{ padding: "1rem", color: "#b0aca7", fontSize: "0.42rem", letterSpacing: "0.12em", lineHeight: 1.7 }}>
+            Glisse les polaroids pour changer leur ordre dans la galerie.
+            {polaroidsModified && (
               <p style={{ marginTop: "0.8rem", color: "#1a1a1a" }}>
                 ● Modifications non sauvegardées
               </p>
@@ -502,6 +568,51 @@ export default function AdminPage() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={`/drawings/les-inconnus/${file}`}
+                      alt={file}
+                      draggable={false}
+                      style={{ width: "60px", height: "60px", objectFit: "cover", display: "block", flexShrink: 0, backgroundColor: "#ede9e4" }}
+                    />
+                    <span style={{ fontSize: "0.42rem", letterSpacing: "0.06em", color: "#999", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap", flex: 1 }}>
+                      {file}
+                    </span>
+                  </div>
+                </Reorder.Item>
+              ))}
+            </Reorder.Group>
+          </div>
+        )}
+
+        {/* ── POLAROIDS MODE ── */}
+        {mode === "polaroids" && (
+          <div style={{ overflowY: "auto", flex: 1, padding: "1rem 1.5rem" }}>
+            <Reorder.Group
+              axis="y"
+              values={polaroidsOrder}
+              onReorder={(next) => { setPolaroidsOrder(next); setPolaroidsModified(true); setStatus("idle"); }}
+              style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "4px" }}
+            >
+              {polaroidsOrder.map((file, i) => (
+                <Reorder.Item
+                  key={file}
+                  value={file}
+                  whileDrag={{ scale: 1.01, boxShadow: "0 6px 20px rgba(0,0,0,0.10)", zIndex: 10 }}
+                  style={{ cursor: "grab" }}
+                >
+                  <div style={{
+                    display: "flex", alignItems: "center", gap: "0.75rem",
+                    padding: "0.3rem 0.6rem 0.3rem 0.5rem",
+                    background: "#fff", border: "1px solid #e8e5e1", userSelect: "none",
+                  }}>
+                    <span style={{ color: "#c8c4bf", fontSize: "1rem", lineHeight: 1, flexShrink: 0 }}>⠿</span>
+                    <span style={{
+                      fontSize: "0.4rem", letterSpacing: "0.1em",
+                      color: "#c8c4bf", minWidth: "1.6rem", textAlign: "right", flexShrink: 0,
+                    }}>
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`/polaroids/${encodeURIComponent(file)}`}
                       alt={file}
                       draggable={false}
                       style={{ width: "60px", height: "60px", objectFit: "cover", display: "block", flexShrink: 0, backgroundColor: "#ede9e4" }}
