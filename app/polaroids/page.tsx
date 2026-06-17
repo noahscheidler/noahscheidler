@@ -40,6 +40,8 @@ const DEFAULT_POLAROIDS = [
   "Scan 10.JPG",
   "Scan 12.JPG",
   "Scan 14.JPG",
+  "IMG_8448.jpg",
+  "IMG_8452.JPG",
 ];
 
 const STORAGE_KEY = "polaroids-order";

@@ -166,6 +166,7 @@ const POLAROID_PREVIEW = [
   "IMG_3699.jpg", "NOAH 23.jpg", "polaroid-03.jpg", "Scan 8.JPG",
   "POLA B 6.jpg", "IMG_7837.JPG", "NOAH 25.JPG", "polaroid-04.jpg",
   "Scan 14.JPG", "IMG_2235.JPG", "NOAH 49.jpg", "polaroid-06.jpg",
+  "IMG_8448.jpg", "IMG_8452.JPG",
 ];
 
 const PAINTING_FILES = [
