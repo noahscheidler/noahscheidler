@@ -92,7 +92,7 @@ const BASE_FILMS: Film[] = [
     year: "2023",
     description: "",
     descriptionFr: "",
-    images: Array.from({ length: 10 }, (_, i) => `mariage-mort-${String(i + 1).padStart(2, "0")}.jpg`),
+    images: Array.from({ length: 13 }, (_, i) => `mariage-mort-${String(i + 1).padStart(2, "0")}.jpg`),
   },
   {
     slug: "miroir-de-l-ame",
