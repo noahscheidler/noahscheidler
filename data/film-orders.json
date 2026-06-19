@@ -34,11 +34,10 @@
     "chambre-rock-08.jpg",
     "chambre-rock-15.jpg",
     "chambre-rock-07.jpg",
-    "chambre-rock-09.jpg",
     "chambre-rock-13.jpg",
+    "chambre-rock-09.jpg",
     "chambre-rock-16.jpg",
     "chambre-rock-14.jpg",
-    "chambre-rock-17.jpg",
     "chambre-rock-03.jpg",
     "chambre-rock-18.jpg",
     "chambre-rock-05.jpg",
@@ -226,5 +225,13 @@
     "la-veuve-04.jpg",
     "la-veuve-01.jpg",
     "la-veuve-06.jpg"
+  ],
+  "la-muse": [
+    "la-muse-01.jpg",
+    "la-muse-04.jpg",
+    "la-muse-03.jpg",
+    "la-muse-02.jpg",
+    "la-muse-06.jpg",
+    "la-muse-05.jpg"
   ]
 }
